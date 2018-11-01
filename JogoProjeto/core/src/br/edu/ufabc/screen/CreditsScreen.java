@@ -1,6 +1,7 @@
 package br.edu.ufabc.screen;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
@@ -30,7 +31,7 @@ public class CreditsScreen extends AbstractScreen{
 	@Override
 	public void update(float delta) {
 		// TODO Auto-generated method stub
-		if (Gdx.input.justTouched()) {
+		if (Gdx.input.isKeyJustPressed(Keys.ENTER)) {
 			setDone(true);
 		}
 	}
