@@ -2,7 +2,9 @@ package br.edu.ufabc.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
 
@@ -13,13 +15,17 @@ public class CreditsScreen extends AbstractScreen{
 	private SpriteBatch spriteBatch;
 	private Texture     texture;
 	private Matrix4 viewMatrix;
-
+	private BitmapFont fontEnd;
 
 	public CreditsScreen(String id) {
 		super(id);
 		texture = new Texture(Gdx.files.internal("GameOverScreen.png"));
 		spriteBatch = new SpriteBatch();
 		viewMatrix  = new Matrix4();
+		
+		fontEnd = new BitmapFont(Gdx.files.internal("fonts/theEnd.fnt"));
+		fontEnd.setColor(Color.YELLOW);
+		fontEnd.getData().setScale(2.5f, 2f);
 	}
 	@Override
 	public void dispose() {
@@ -45,6 +51,9 @@ public class CreditsScreen extends AbstractScreen{
 		spriteBatch.draw(texture,0,0,Parameters.GAME_WIDTH, Parameters.GAME_HEIGHT,
                                  0,0,texture.getWidth(), texture.getHeight(),
                                  false, false);
+		
+		fontEnd.draw(spriteBatch, "THE END", 10, 50);
+		
 		spriteBatch.end();
 	}
 
