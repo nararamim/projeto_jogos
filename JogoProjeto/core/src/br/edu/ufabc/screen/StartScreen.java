@@ -15,7 +15,9 @@ public class StartScreen extends AbstractScreen {
 	private SpriteBatch spriteBatch;
 	private Matrix4     viewMatrix;
 	private BitmapFont fontStart;
-	private BitmapFont fontTitle;	
+	private BitmapFont fontTitle;
+	private double tempo;
+	private boolean titleVisible = true;
 
 	public StartScreen(String id) {
 		super(id);
@@ -41,6 +43,12 @@ public class StartScreen extends AbstractScreen {
 		if (Gdx.input.isKeyJustPressed(Keys.ENTER)) {
 			setDone(true);
 		}
+		
+		tempo += Gdx.graphics.getDeltaTime();
+	    if (tempo >= 0.30f)  {
+		    titleVisible = !titleVisible;
+		    tempo = 0;
+	    } 
 	}
 
 	@Override
@@ -52,7 +60,7 @@ public class StartScreen extends AbstractScreen {
 				                  0, 0, texture.getWidth(), texture.getHeight(), 
 				                  false, false);
 		
-		fontStart.draw(spriteBatch, "Press Enter", 430, 80);
+		fontStart.draw(spriteBatch, (titleVisible) ? "Press Enter" : " ", 430, 80);
 		fontTitle.draw(spriteBatch, "Runner", 10, 550);
 		fontTitle.draw(spriteBatch, "Bart", 10, 480);
 		
