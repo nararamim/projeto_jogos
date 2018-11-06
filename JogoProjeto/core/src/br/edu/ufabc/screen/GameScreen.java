@@ -36,7 +36,7 @@ public class GameScreen extends AbstractScreen{
 		camera.position.set(10f, 10f, 10f);
 		camera.lookAt(0f, 0f, 0f);  // a camera "olha" para a origem
 		camera.near = 0.1f;
-		camera.far  = 100f;
+		camera.far  = 300f;
 		camera.update();
 		inputController = new CameraInputController(camera);
 		Gdx.input.setInputProcessor(inputController);
