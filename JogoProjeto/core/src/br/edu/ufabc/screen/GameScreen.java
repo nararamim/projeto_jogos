@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g3d.Environment;
+import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
@@ -30,6 +31,7 @@ public class GameScreen extends AbstractScreen{
 	private PerspectiveCamera 			camera;
 	private Environment      	 		environment;
 	private ModelBatch     	  	 	 	modelBatch;
+	private ArrayList<ModelInstance>    ceus;
 	//private ModelInstance  			 	modelo3D;
 	//private CameraInputController	 	inputController;
 	
@@ -51,19 +53,30 @@ public class GameScreen extends AbstractScreen{
 		modelBatch = new ModelBatch();
 		environment = new Environment();
 		caminhos = new ArrayList<GameObject>();
-		environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1));
+		environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.8f, 0.8f, 0.8f, 1));
 		environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
 		camera = new PerspectiveCamera(67.0f, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		camera.position.set(0f, 55f, 50f);
 		camera.lookAt(0f, 40f, 0f);  // a camera "olha" para a origem
 		camera.near = 0.1f;
-		camera.far  = 400f;
+		camera.far  = 800f;
 		camera.update();
 		//inputController = new CameraInputController(camera);
 		//Gdx.input.setInputProcessor(inputController);
 		
 		ModelLoader<ModelLoader.ModelParameters> loader;
 		loader = new G3dModelLoader(new UBJsonReader());
+		
+		Model modeloCeu = loader.loadModel(Gdx.files.internal("sky_ground.g3db"));
+		ceus = new ArrayList<ModelInstance>();
+		ModelInstance ceu = new ModelInstance(modeloCeu);
+		ceu.transform.translate(0, 0, -650);
+		ceu.transform.rotate(Vector3.X, 90);
+		ceu.transform.rotate(Vector3.Y, 90);
+		ceu.transform.translate(0, 0 ,-520);
+		ceu.transform.translate(-40, 10, 0);
+		ceu.transform.scale(4, 1, 4);
+		ceus.add(ceu);
 		   
 		   
 		//////////////////////////////////////////////////////////////////////////////////////////   
@@ -78,7 +91,7 @@ public class GameScreen extends AbstractScreen{
 		zcaminho = -80;
 		countcaminho = 0;
 		
-		for(int i = 0; i < 3; i++) {
+		for(int i = 0; i < 6; i++) {
 			GameObject caminho = new GameObject(ModelFactory.getModelbyName("chao"));
 			Vector3 pos = new Vector3();
 			pos.x = -188;
@@ -107,12 +120,12 @@ public class GameScreen extends AbstractScreen{
 			setDone(true);
 		}
 		
-		if(countcaminho ==60) {
+		if(countcaminho == 62) {
 			GameObject caminho = new GameObject(ModelFactory.getModelbyName("chao"));
 			Vector3 pos = new Vector3();
 			pos.x = -188;
 			pos.y = 0;
-			pos.z = -450;
+			pos.z = -850;
 			caminho.transform.translate(pos);
 			caminho.update(1);
 			
@@ -149,12 +162,15 @@ public class GameScreen extends AbstractScreen{
         // TODO Auto-generated method stub
 		Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClearColor(0, 0, 1, 1);
 		
 		modelBatch.begin(camera);
 		modelBatch.render(Bart.getCurrent(), environment);
 		for( GameObject g : caminhos) {
 			modelBatch.render(g,environment);
+		}
+		for(ModelInstance m: ceus) {
+			modelBatch.render(m, environment);
 		}
 		modelBatch.end();
 		
