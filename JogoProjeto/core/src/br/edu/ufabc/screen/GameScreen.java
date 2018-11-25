@@ -73,8 +73,8 @@ public class GameScreen extends AbstractScreen{
 		ceu.transform.translate(0, 0, -650);
 		ceu.transform.rotate(Vector3.X, 90);
 		ceu.transform.rotate(Vector3.Y, 90);
-		ceu.transform.translate(0, 0 ,-520);
-		ceu.transform.translate(-40, 10, 0);
+		ceu.transform.translate(0, 0, -520);
+		ceu.transform.translate(470, 40, 250);
 		ceu.transform.scale(4, 1, 4);
 		ceus.add(ceu);
 		   
@@ -162,7 +162,7 @@ public class GameScreen extends AbstractScreen{
         // TODO Auto-generated method stub
 		Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-		Gdx.gl.glClearColor(0, 0, 1, 1);
+		Gdx.gl.glClearColor(0, 0, 0, 1);
 		
 		modelBatch.begin(camera);
 		modelBatch.render(Bart.getCurrent(), environment);
