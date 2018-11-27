@@ -22,8 +22,8 @@ public class Bart {
 		estados[JUMP].transform.rotate(Vector3.Y, 180);
 		
 		for (Material mat: estados[RUN].materials){
-			mat.set(new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA));
-			//mat.remove(BlendingAttribute.Type);
+//			m.set(new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA));
+			mat.remove(BlendingAttribute.Type);
 		}
 		
 	}
