@@ -8,28 +8,35 @@ import com.badlogic.gdx.math.Vector3;
 public class Bart {
 	private GameObject      estados[];
 	private int             estado;
-	public static final int IDLE=0;
+	public static final int RUN=0;
+	public static final int JUMP=1;
 	
 	public Bart() {
-		estados = new GameObject[4];
-		estados[IDLE] = new GameObject(ModelFactory.getModelbyName("BART"));
-		estados[IDLE].transform.scale(20,20,20);
-		estados[IDLE].transform.rotate(Vector3.Y, 180);
-		for (Material mat: estados[IDLE].materials){
-//			m.set(new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA));
-			mat.remove(BlendingAttribute.Type);
+		estados = new GameObject[2];
+		estados[RUN] = new GameObject(ModelFactory.getModelbyName("BartRun"));
+		estados[RUN].transform.scale(20,20,20);
+		estados[RUN].transform.rotate(Vector3.Y, 180);
+		
+		estados[JUMP] = new GameObject(ModelFactory.getModelbyName("BartJump"));
+		estados[JUMP].transform.scale(20,20,20);
+		estados[JUMP].transform.rotate(Vector3.Y, 180);
+		
+		for (Material mat: estados[RUN].materials){
+			mat.set(new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA));
+			//mat.remove(BlendingAttribute.Type);
 		}
 		
 	}
 	public void update(float delta) {
-//
-		estados[IDLE].update(delta);
-		
+		estados[estado].update(delta);		
 	}
 		
 
-	public void andar() {
-
+	public void pular() {
+		for (GameObject estado: estados) {
+			estado.transform.translate(200,0,0);
+		}
+		estado = JUMP;
 	}
 	
 	public void virarEsquerda() {

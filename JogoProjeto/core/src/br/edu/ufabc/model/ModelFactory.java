@@ -17,7 +17,8 @@ public class ModelFactory {
 		ModelLoader<ModelParameters> loader;
 		loader = new G3dModelLoader(new UBJsonReader());
 		//System.out.println("Carregando modelos...");
-	     modelos.put("BART", loader.loadModel(Gdx.files.internal("Running.g3db")));
+	     modelos.put("BartRun", loader.loadModel(Gdx.files.internal("Running.g3db")));
+	     modelos.put("BartJump", loader.loadModel(Gdx.files.internal("Jump.g3db")));
 	     modelos.put("chao", loader.loadModel(Gdx.files.internal("chao.g3db")));
 
 	     //System.out.println("Modelos carregados!");

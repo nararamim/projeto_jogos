@@ -137,13 +137,11 @@ public class GameScreen extends AbstractScreen{
 		for( GameObject g : caminhos) {
 			g.transform.translate(0,0,3);
 			g.update(1);
-		}
-
-		Bart.update(delta);
+		}		
 				
 		//pular
 		if(Gdx.input.isKeyJustPressed(Keys.UP)) {
-			//Bart.pular();
+			Bart.pular();
 		}
 		if(Gdx.input.isKeyJustPressed(Keys.RIGHT)) {
 			//Bart.direita();
@@ -151,9 +149,8 @@ public class GameScreen extends AbstractScreen{
 		if(Gdx.input.isKeyJustPressed(Keys.LEFT)) {
 			//Bart.esquerda();
 		}
-		if(Gdx.input.isButtonPressed(Keys.DOWN )) {
-			//Bart.abaixa();
-		}
+		
+		Bart.update(delta);
 		
 		//System.out.println("tamanho do array: "+caminhos.size());
 	}
@@ -167,7 +164,8 @@ public class GameScreen extends AbstractScreen{
 		
 		modelBatch.begin(camera);
 		modelBatch.render(Bart.getCurrent(), environment);
-		for( GameObject g : caminhos) {
+		
+		for(GameObject g : caminhos) {
 			modelBatch.render(g,environment);
 		}
 		for(ModelInstance m: ceus) {
