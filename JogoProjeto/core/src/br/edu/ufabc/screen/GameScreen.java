@@ -74,7 +74,7 @@ public class GameScreen extends AbstractScreen{
 		ceu.transform.rotate(Vector3.X, 90);
 		ceu.transform.rotate(Vector3.Y, 90);
 		ceu.transform.translate(0, 0, -520);
-		ceu.transform.translate(474, 40, 250);
+		ceu.transform.translate(462, 40, 250);
 		ceu.transform.scale(4, 1, 4);
 		ceus.add(ceu);
 		   
@@ -138,7 +138,8 @@ public class GameScreen extends AbstractScreen{
 			g.transform.translate(0,0,3);
 			g.update(1);
 		}
-		
+
+		Bart.update(delta);
 				
 		//pular
 		if(Gdx.input.isKeyJustPressed(Keys.UP)) {

@@ -28,10 +28,7 @@ public class GameObject extends ModelInstance {
 		boundingBox.getMin(originalMin);
 
 		/* modo debug */
-//		System.out.println("Animacoes = " + animations.size);
-//		for (Animation a : animations) {
-//			System.out.println(" --- Animacao " + a.id);
-//		}
+
 
 		animationController = new AnimationController(this);
 		if (animations.size > 0) {
