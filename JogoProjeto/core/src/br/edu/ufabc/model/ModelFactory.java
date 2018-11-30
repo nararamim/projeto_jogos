@@ -19,7 +19,7 @@ public class ModelFactory {
 		//System.out.println("Carregando modelos...");
 	     modelos.put("BartRun", loader.loadModel(Gdx.files.internal("Running.g3db")));
 	     modelos.put("BartJump", loader.loadModel(Gdx.files.internal("Jump.g3db")));
-	     modelos.put("BartDying", loader.loadModel(Gdx.files.internal("Jump.g3db")));
+	     modelos.put("BartDying", loader.loadModel(Gdx.files.internal("dying.g3db")));
 	     modelos.put("chao", loader.loadModel(Gdx.files.internal("chao.g3db")));
 	     modelos.put("rato", loader.loadModel(Gdx.files.internal("rat.g3db")));
 	     modelos.put("pedra", loader.loadModel(Gdx.files.internal("rat.g3db")));

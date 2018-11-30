@@ -13,10 +13,10 @@ public class Bart {
 	public static final int DYING=2;
 
 	public Bart() {
-		estados = new GameObject[2];
+		estados = new GameObject[3];
 		estados[RUN] = new GameObject(ModelFactory.getModelbyName("BartRun"));
 		estados[JUMP] = new GameObject(ModelFactory.getModelbyName("BartJump"));
-		//estados[DYING] = new GameObject(ModelFactory.getModelbyName("BartDying"));
+		estados[DYING] = new GameObject(ModelFactory.getModelbyName("BartDying")); //TODO escala está errada
 
 		settings();
 	}
@@ -47,6 +47,10 @@ public class Bart {
 	public void pular() {
         //TODO Lógica de pular em parábola
 		estado = JUMP;
+	}
+
+	public void morrer() {
+		estado = DYING;
 	}
 	
 	public void direita() {

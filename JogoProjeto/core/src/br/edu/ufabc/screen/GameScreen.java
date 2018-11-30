@@ -165,6 +165,9 @@ public class GameScreen extends AbstractScreen{
 		if(Gdx.input.isKeyJustPressed(Keys.LEFT)) {
 			Bart.esquerda();
 		}
+        if(Gdx.input.isKeyJustPressed(Keys.SPACE)) {
+            Bart.morrer();
+        }
 		
 		Bart.update(delta);
         checkColisions();
