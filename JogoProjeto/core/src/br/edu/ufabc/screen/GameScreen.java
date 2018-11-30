@@ -42,6 +42,7 @@ public class GameScreen extends AbstractScreen{
     private ArrayList<GameObject>       objetos;
 	private Bart 						Bart;
 	private double						pontos = 0;
+	private double						vidas = 3;
 	private BitmapFont 					font;
 	private SpriteBatch 				spriteBatch;
 	private Matrix4 					viewMatrix;
@@ -144,7 +145,7 @@ public class GameScreen extends AbstractScreen{
 	public void update(float delta) {
 		countcaminho+=1;
 		pontos+=0.03;
-		if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
+		if (Gdx.input.isKeyJustPressed(Keys.ESCAPE) || vidas == 0) {
 			setDone(true);
 		}
 
@@ -165,7 +166,7 @@ public class GameScreen extends AbstractScreen{
 		if(Gdx.input.isKeyJustPressed(Keys.LEFT)) {
 			Bart.esquerda();
 		}
-        if(Gdx.input.isKeyJustPressed(Keys.SPACE)) {
+        if(Gdx.input.isKeyJustPressed(Keys.SPACE)) {        	
             Bart.morrer();
         }
 		
@@ -214,6 +215,7 @@ public class GameScreen extends AbstractScreen{
 		spriteBatch.begin();
 		//pontos+=1;
 		font.draw(spriteBatch, "Pontos\n" + (int) pontos, 10, 550);
+		font.draw(spriteBatch, "Vidas\n" + (int) vidas, 670, 550);
 		spriteBatch.end();
 		
 		///////////////////////////////////////
@@ -224,6 +226,7 @@ public class GameScreen extends AbstractScreen{
             if (g.collidesWith(Bart.getCurrent())) {
                 System.out.println("Bart trombou no objeto");
                 trombou = true;
+                vidas--;
                 break;
             } else {
                 trombou = false;
