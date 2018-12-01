@@ -169,8 +169,7 @@ public class GameScreen extends AbstractScreen{
 		if(Gdx.input.isKeyJustPressed(Keys.LEFT) || Gdx.input.isButtonPressed(Buttons.LEFT)) {
 			Bart.esquerda();
 		}
-        if(Gdx.input.isKeyJustPressed(Keys.SPACE)) {
-        	vidas--;
+        if(Gdx.input.isKeyJustPressed(Keys.SPACE)) {        	
             Bart.morrer();
         }
 		
