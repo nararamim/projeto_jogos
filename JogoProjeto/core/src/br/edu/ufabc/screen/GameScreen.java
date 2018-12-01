@@ -47,9 +47,10 @@ public class GameScreen extends AbstractScreen{
 	private BitmapFont 					font;
 	private SpriteBatch 				spriteBatch;
 	private Matrix4 					viewMatrix;
-	private int							zcaminho;
-	private int							countcaminho;
+	private float						zcaminho;
+	private float						countcaminho;
     private boolean                     trombou;
+    private float						speed = 3f;
 	
 	//////////////////////////////////////////////////
 
@@ -90,13 +91,13 @@ public class GameScreen extends AbstractScreen{
 	}
 
     private void setupAlternanciaCaminhos() {
-        for(int i = 0; i < 6; i++) {
+        for(int i = 0; i < 5; i++) {
             GameObject caminho = new GameObject(ModelFactory.getModelbyName("chao"));
             Vector3 pos = new Vector3();
             pos.x = -188;
             pos.y = 0;
             pos.z = zcaminho;
-            zcaminho-=185;
+            zcaminho-=190;
             caminho.transform.translate(pos);
             caminho.update(1);
 
@@ -144,8 +145,8 @@ public class GameScreen extends AbstractScreen{
 
 	@Override
 	public void update(float delta) {
-		countcaminho+=1;
-		pontos+=0.03;
+		countcaminho+=speed;
+		pontos+=0.01*speed;
 		if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
 			setDone(true);
 		}
@@ -154,7 +155,7 @@ public class GameScreen extends AbstractScreen{
 	        updateCaminho();
 	
 	        for(GameObject g : caminhos) {	        	
-					g.transform.translate(0,0,3);
+					g.transform.translate(0,0,speed);
 					g.update(1);        	
 			}		
 		}
@@ -178,7 +179,7 @@ public class GameScreen extends AbstractScreen{
 	}
 
     private void updateCaminho() {
-        if(countcaminho == 62) {
+        if(countcaminho >= 190) {
             GameObject caminho = new GameObject(ModelFactory.getModelbyName("chao"));
             Vector3 pos = new Vector3();
             pos.x = -188;
@@ -188,9 +189,10 @@ public class GameScreen extends AbstractScreen{
             caminho.update(1);
 
             caminhos.add(caminho);
-            countcaminho = 0;
+            countcaminho-= 190;
             caminhos.remove(0);
         }
+        if(speed < 6.5) speed+=0.0005;
     }
 
     @Override
