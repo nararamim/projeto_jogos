@@ -7,7 +7,7 @@ public class Wall {
 	
 	public Wall() {
 		estados = new GameObject[4];
-		estados[IDLE] = new GameObject(ModelFactory.getModelbyName("BART"));
+		estados[IDLE] = new GameObject(ModelFactory.getModelbyName("parede"));
 		
 	}
 	public void update(float delta) {

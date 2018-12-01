@@ -2,6 +2,7 @@ package br.edu.ufabc.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -11,13 +12,14 @@ import com.badlogic.gdx.math.Matrix4;
 import br.edu.ufabc.util.Parameters;
 
 public class StartScreen extends AbstractScreen {
-	private Texture	texture;
-	private SpriteBatch spriteBatch;
-	private Matrix4     viewMatrix;
-	private BitmapFont fontStart;
-	private BitmapFont fontTitle;
-	private double tempo;
-	private boolean titleVisible = true;
+	private Texture	        texture;
+	private SpriteBatch		spriteBatch;
+	private Matrix4         viewMatrix;
+	private BitmapFont      fontStart;
+	private BitmapFont      fontTitle;
+	private double          tempo;
+	private boolean         titleVisible = true;
+	private Music           startMusic;
 
 	public StartScreen(String id) {
 		super(id);
@@ -31,6 +33,8 @@ public class StartScreen extends AbstractScreen {
 		fontTitle = new BitmapFont(Gdx.files.internal("fonts/gameTitle.fnt"));
 		fontTitle.setColor(Color.YELLOW);
 		fontTitle.getData().setScale(1.3f, 1.6f);
+		
+		musicInitialization();
 	}
 	@Override
 	public void dispose() {
@@ -41,6 +45,7 @@ public class StartScreen extends AbstractScreen {
 	@Override
 	public void update(float delta) {
 		if (Gdx.input.isKeyJustPressed(Keys.ENTER)) {
+			startMusic.dispose();
 			setDone(true);
 		}
 		
@@ -66,5 +71,10 @@ public class StartScreen extends AbstractScreen {
 		
 		spriteBatch.end();
 	}
-
+	
+	private void musicInitialization() {
+		startMusic = Gdx.audio.newMusic(Gdx.files.internal("music/simpsons_theme.mp3"));
+		startMusic.setLooping(true);
+		startMusic.play();
+	}
 }

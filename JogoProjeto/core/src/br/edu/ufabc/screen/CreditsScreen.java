@@ -2,6 +2,7 @@ package br.edu.ufabc.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -12,10 +13,11 @@ import br.edu.ufabc.screen.AbstractScreen;
 import br.edu.ufabc.util.Parameters;
 
 public class CreditsScreen extends AbstractScreen{
-	private SpriteBatch spriteBatch;
-	private Texture     texture;
-	private Matrix4 viewMatrix;
-	private BitmapFont fontEnd;
+	private SpriteBatch   spriteBatch;
+	private Texture       texture;
+	private Matrix4       viewMatrix;
+	private BitmapFont    fontEnd;
+	private Music         creditsMusic;
 
 	public CreditsScreen(String id) {
 		super(id);
@@ -26,6 +28,8 @@ public class CreditsScreen extends AbstractScreen{
 		fontEnd = new BitmapFont(Gdx.files.internal("fonts/theEnd.fnt"));
 		fontEnd.setColor(Color.YELLOW);
 		fontEnd.getData().setScale(2.5f, 2f);
+		
+		musicInitialization();
 	}
 	@Override
 	public void dispose() {
@@ -57,4 +61,8 @@ public class CreditsScreen extends AbstractScreen{
 		spriteBatch.end();
 	}
 
+	private void musicInitialization() {
+		creditsMusic = Gdx.audio.newMusic(Gdx.files.internal("music/fail.wav"));		
+		creditsMusic.play();
+	}
 }

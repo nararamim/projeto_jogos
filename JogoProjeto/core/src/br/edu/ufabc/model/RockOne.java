@@ -7,7 +7,7 @@ public class RockOne {
 	
 	public RockOne() {
 		estados = new GameObject[4];
-		estados[IDLE] = new GameObject(ModelFactory.getModelbyName("BART"));
+		estados[IDLE] = new GameObject(ModelFactory.getModelbyName("pedra_um"));
 		
 	}
 	public void update(float delta) {

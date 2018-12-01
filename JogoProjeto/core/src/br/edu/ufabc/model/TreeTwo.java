@@ -7,7 +7,7 @@ public class TreeTwo {
 	
 	public TreeTwo() {
 		estados = new GameObject[4];
-		estados[IDLE] = new GameObject(ModelFactory.getModelbyName("BART"));
+		estados[IDLE] = new GameObject(ModelFactory.getModelbyName("arvore_dois"));
 		
 	}
 	public void update(float delta) {

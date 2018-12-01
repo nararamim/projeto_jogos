@@ -16,7 +16,7 @@ public class Bart {
 		estados = new GameObject[3];
 		estados[RUN] = new GameObject(ModelFactory.getModelbyName("BartRun"));
 		estados[JUMP] = new GameObject(ModelFactory.getModelbyName("BartJump"));
-		estados[DYING] = new GameObject(ModelFactory.getModelbyName("BartDying")); //TODO escala está errada
+		estados[DYING] = new GameObject(ModelFactory.getModelbyName("BartDying"));
 
 		settings();
 	}

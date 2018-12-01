@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.assets.loaders.ModelLoader;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
@@ -51,7 +52,8 @@ public class GameScreen extends AbstractScreen{
 	private float						countcaminho;
     private boolean                     trombou;
     private float						speed = 3f;
-	
+    private Music           			gameMusic;
+    
 	//////////////////////////////////////////////////
 
 	public GameScreen(String id) {
@@ -71,6 +73,7 @@ public class GameScreen extends AbstractScreen{
 		Bart = new Bart();
         objetos = new ArrayList<GameObject>();
 
+        // TODO: adicionar demais objetos
         for (GameObject n : caminhos) {
             GameObject rato = new GameObject(ModelFactory.getModelbyName("rato"));
             Vector3 pos = new Vector3();
@@ -88,6 +91,8 @@ public class GameScreen extends AbstractScreen{
 		countcaminho = 0;
 
         setupAlternanciaCaminhos();
+        
+        musicInitialization();
 	}
 
     private void setupAlternanciaCaminhos() {
@@ -103,6 +108,13 @@ public class GameScreen extends AbstractScreen{
 
             caminhos.add(caminho);
         }
+    }
+    
+    private void musicInitialization() {
+    	gameMusic = Gdx.audio.newMusic(Gdx.files.internal("music/simpsons_game_theme.mp3"));
+    	gameMusic.setVolume(0.5f);
+    	gameMusic.setLooping(true);
+    	gameMusic.play();
     }
 
     private void setFonts() {
@@ -148,16 +160,20 @@ public class GameScreen extends AbstractScreen{
 		countcaminho+=speed;
 		pontos+=0.01*speed;
 		if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
+			gameMusic.dispose();
 			setDone(true);
 		}
 
-		if (vidas >= 0) {
+		if (vidas > 0) {
 	        updateCaminho();
 	
 	        for(GameObject g : caminhos) {	        	
 					g.transform.translate(0,0,speed);
 					g.update(1);        	
 			}		
+		}
+		else {
+			confirmTryAgain();
 		}
 
 		// teclas de jogo
@@ -170,7 +186,8 @@ public class GameScreen extends AbstractScreen{
 		if(Gdx.input.isKeyJustPressed(Keys.LEFT) || Gdx.input.isButtonPressed(Buttons.LEFT)) {
 			Bart.esquerda();
 		}
-        if(Gdx.input.isKeyJustPressed(Keys.SPACE)) {        	
+        if(Gdx.input.isKeyJustPressed(Keys.SPACE)) {
+        	vidas--;
             Bart.morrer();
         }
 		
@@ -193,6 +210,22 @@ public class GameScreen extends AbstractScreen{
             caminhos.remove(0);
         }
         if(speed < 6.5) speed+=0.0005;
+    }
+    
+    private void confirmTryAgain() {
+    	viewMatrix.setToOrtho2D(0, 0, Parameters.GAME_WIDTH, Parameters.GAME_HEIGHT);
+    	spriteBatch.setProjectionMatrix(viewMatrix);
+		spriteBatch.begin();
+    	font.draw(spriteBatch, "Press Enter for Try Again!", 10, 550);
+    	spriteBatch.end();
+    	
+    	if (Gdx.input.isKeyJustPressed(Keys.ENTER)) {
+    		new GameScreen("GAME");
+    	}
+    	else {
+    		setDone(true);
+    		gameMusic.dispose();
+    	}
     }
 
     @Override
@@ -219,8 +252,8 @@ public class GameScreen extends AbstractScreen{
 		spriteBatch.setProjectionMatrix(viewMatrix);
 		spriteBatch.begin();
 		//pontos+=1;
-		font.draw(spriteBatch, "Pontos\n" + (int) pontos, 10, 550);
-		font.draw(spriteBatch, "Vidas\n" + (int) vidas, 670, 550);
+		font.draw(spriteBatch, "Points\n" + (int) pontos, 10, 550);
+		font.draw(spriteBatch, "Lifes\n" + (int) vidas, 670, 550);
 		spriteBatch.end();
 		
 		///////////////////////////////////////
