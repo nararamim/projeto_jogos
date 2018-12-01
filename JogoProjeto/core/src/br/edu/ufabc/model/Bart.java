@@ -25,7 +25,7 @@ public class Bart {
 	    for(GameObject estado: estados){
 	    	estado.transform.scale(20,20,20);
             estado.transform.rotate(Vector3.Y, 180);
-            estado.transform.translate(0,0.5f, 0);
+            estado.transform.translate(0, 0.5f, 0);
 
             for (Material mat: estado.materials){
                 //mat.set(new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA));

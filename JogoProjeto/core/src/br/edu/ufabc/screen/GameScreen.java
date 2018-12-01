@@ -146,28 +146,31 @@ public class GameScreen extends AbstractScreen{
 	public void update(float delta) {
 		countcaminho+=1;
 		pontos+=0.03;
-		if (Gdx.input.isKeyJustPressed(Keys.ESCAPE) || vidas == 0) {
+		if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
 			setDone(true);
 		}
 
-        updateCaminho();
-
-        for(GameObject g : caminhos) {
-			g.transform.translate(0,0,3);
-			g.update(1);
-		}		
+		if (vidas >= 0) {
+	        updateCaminho();
+	
+	        for(GameObject g : caminhos) {	        	
+					g.transform.translate(0,0,3);
+					g.update(1);        	
+			}		
+		}
 
 		// teclas de jogo
 		if(Gdx.input.isKeyJustPressed(Keys.UP) || Gdx.input.isButtonPressed(Buttons.MIDDLE)) {
 			Bart.pular();
 		}
-		if(Gdx.input.isKeyJustPressed(Keys.RIGHT)) {
+		if(Gdx.input.isKeyJustPressed(Keys.RIGHT) || Gdx.input.isButtonPressed(Buttons.RIGHT)) {
 			Bart.direita();
 		}
-		if(Gdx.input.isKeyJustPressed(Keys.LEFT)) {
+		if(Gdx.input.isKeyJustPressed(Keys.LEFT) || Gdx.input.isButtonPressed(Buttons.LEFT)) {
 			Bart.esquerda();
 		}
-        if(Gdx.input.isKeyJustPressed(Keys.SPACE)) {        	
+        if(Gdx.input.isKeyJustPressed(Keys.SPACE)) {
+        	vidas--;
             Bart.morrer();
         }
 		
