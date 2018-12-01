@@ -23,7 +23,7 @@ public class Bart {
 
 	private void settings(){
 	    for(GameObject estado: estados){
-            estado.transform.scale(20,20,20);
+	    	estado.transform.scale(20,20,20);
             estado.transform.rotate(Vector3.Y, 180);
             estado.transform.translate(0,0.5f, 0);
 

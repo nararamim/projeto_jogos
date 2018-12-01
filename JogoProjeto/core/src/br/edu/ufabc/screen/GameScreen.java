@@ -3,6 +3,7 @@ package br.edu.ufabc.screen;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.assets.loaders.ModelLoader;
 import com.badlogic.gdx.graphics.Color;
@@ -157,7 +158,7 @@ public class GameScreen extends AbstractScreen{
 		}		
 
 		// teclas de jogo
-		if(Gdx.input.isKeyJustPressed(Keys.UP)) {
+		if(Gdx.input.isKeyJustPressed(Keys.UP) || Gdx.input.isButtonPressed(Buttons.MIDDLE)) {
 			Bart.pular();
 		}
 		if(Gdx.input.isKeyJustPressed(Keys.RIGHT)) {
