@@ -3,15 +3,23 @@ package br.edu.ufabc.screen;
 import com.badlogic.gdx.Screen;
 
 public abstract class AbstractScreen implements Screen{
-	public abstract void update(float delta);
-	public abstract void draw(float delta);
-	private boolean done; 
-	private String  id;
+	public abstract void   update(float delta);
+	public abstract void   draw(float delta);
+	private boolean        done; 
+	private String         id;
+	private boolean        setTryAgain;
 	
 	public AbstractScreen(String id) {
 		this.id = id;
 	}
 	
+	public boolean getTryAgain() {  
+		return this.setTryAgain;
+	}
+	
+	public void setTryAgain(boolean t) {
+		this.setTryAgain = t;
+	}
 	
 	public String getId() {  
 		return this.id;

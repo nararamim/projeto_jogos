@@ -172,8 +172,11 @@ public class GameScreen extends AbstractScreen{
 					g.update(1);        	
 			}		
 		}
-		else {
-			confirmTryAgain();
+		else {			
+			Bart.morrer();
+			Bart.update(delta);
+			gameMusic.dispose();
+			setDone(true);
 		}
 
 		// teclas de jogo
@@ -186,7 +189,8 @@ public class GameScreen extends AbstractScreen{
 		if(Gdx.input.isKeyJustPressed(Keys.LEFT) || Gdx.input.isButtonPressed(Buttons.LEFT)) {
 			Bart.esquerda();
 		}
-        if(Gdx.input.isKeyJustPressed(Keys.SPACE)) {        	
+        if(Gdx.input.isKeyJustPressed(Keys.SPACE)) {
+        	vidas--;
             Bart.morrer();
         }
 		
@@ -209,22 +213,6 @@ public class GameScreen extends AbstractScreen{
             caminhos.remove(0);
         }
         if(speed < 6.5) speed+=0.0005;
-    }
-    
-    private void confirmTryAgain() {
-    	viewMatrix.setToOrtho2D(0, 0, Parameters.GAME_WIDTH, Parameters.GAME_HEIGHT);
-    	spriteBatch.setProjectionMatrix(viewMatrix);
-		spriteBatch.begin();
-    	font.draw(spriteBatch, "Press Enter for Try Again!", 10, 550);
-    	spriteBatch.end();
-    	
-    	if (Gdx.input.isKeyJustPressed(Keys.ENTER)) {
-    		new GameScreen("GAME");
-    	}
-    	else {
-    		setDone(true);
-    		gameMusic.dispose();
-    	}
     }
 
     @Override
@@ -251,7 +239,7 @@ public class GameScreen extends AbstractScreen{
 		spriteBatch.setProjectionMatrix(viewMatrix);
 		spriteBatch.begin();
 		//pontos+=1;
-		font.draw(spriteBatch, "Points\n" + (int) pontos, 10, 550);
+		font.draw(spriteBatch, "Score\n" + (int) pontos, 10, 550);
 		font.draw(spriteBatch, "Lifes\n" + (int) vidas, 670, 550);
 		spriteBatch.end();
 		

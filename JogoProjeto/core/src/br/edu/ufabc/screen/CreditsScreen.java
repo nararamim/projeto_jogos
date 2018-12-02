@@ -13,17 +13,24 @@ import br.edu.ufabc.screen.AbstractScreen;
 import br.edu.ufabc.util.Parameters;
 
 public class CreditsScreen extends AbstractScreen{
-	private SpriteBatch   spriteBatch;
-	private Texture       texture;
-	private Matrix4       viewMatrix;
-	private BitmapFont    fontEnd;
-	private Music         creditsMusic;
+	private SpriteBatch     spriteBatch;
+	private Texture         texture;
+	private Matrix4         viewMatrix;
+	private BitmapFont      fontEnd;
+	private BitmapFont      fontStart;
+	private Music           creditsMusic;
+	private double          tempo;
+	private boolean         titleVisible = true;
 
 	public CreditsScreen(String id) {
 		super(id);
 		texture = new Texture(Gdx.files.internal("GameOverScreen.png"));
 		spriteBatch = new SpriteBatch();
 		viewMatrix  = new Matrix4();
+		
+		fontStart = new BitmapFont(Gdx.files.internal("fonts/pressStart.fnt"));
+		fontStart.setColor(Color.BLACK);
+		fontStart.getData().setScale(0.7f, 1f);
 		
 		fontEnd = new BitmapFont(Gdx.files.internal("fonts/theEnd.fnt"));
 		fontEnd.setColor(Color.YELLOW);
@@ -40,10 +47,20 @@ public class CreditsScreen extends AbstractScreen{
 
 	@Override
 	public void update(float delta) {
-		// TODO Auto-generated method stub
 		if (Gdx.input.isKeyJustPressed(Keys.ENTER)) {
+			setTryAgain(true);
+			setDone(true);			
+		}
+		else if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
+			setTryAgain(false);
 			setDone(true);
 		}
+
+		tempo += Gdx.graphics.getDeltaTime();
+	    if (tempo >= 0.30f)  {
+		    titleVisible = !titleVisible;
+		    tempo = 0;
+	    } 
 	}
 
 	@Override
@@ -55,7 +72,7 @@ public class CreditsScreen extends AbstractScreen{
 		spriteBatch.draw(texture,0,0,Parameters.GAME_WIDTH, Parameters.GAME_HEIGHT,
                                  0,0,texture.getWidth(), texture.getHeight(),
                                  false, false);
-		
+		fontStart.draw(spriteBatch, (titleVisible) ? "Press Enter to Try Again" : " ", 200, 200);
 		fontEnd.draw(spriteBatch, "THE END", 10, 50);
 		
 		spriteBatch.end();

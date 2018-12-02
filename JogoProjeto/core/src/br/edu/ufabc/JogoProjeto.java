@@ -1,5 +1,7 @@
 package br.edu.ufabc;
 
+import java.security.GeneralSecurityException;
+
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -12,9 +14,9 @@ import br.edu.ufabc.screen.GameScreen;
 import br.edu.ufabc.screen.AbstractScreen;
 
 public class JogoProjeto extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
-	private AbstractScreen currentScreen;
+	SpriteBatch            batch;
+	Texture                img;
+	private AbstractScreen currentScreen;	
 	
 	@Override
 	public void create () {
@@ -39,8 +41,13 @@ public class JogoProjeto extends ApplicationAdapter {
 			else if (currentScreen.getId().equals("GAME")) {
 				currentScreen = new CreditsScreen("CREDITS");
 			}
-			else {
-				Gdx.app.exit();
+			else if (currentScreen.getId().equals("CREDITS")) {
+				if (currentScreen.getTryAgain()) {
+					currentScreen = new GameScreen("GAME");
+				}
+				else {
+					currentScreen = new StartScreen("START");
+				}
 			}
 		}
 	}

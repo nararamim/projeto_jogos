@@ -11,12 +11,15 @@ public class Bart {
 	public static final int RUN=0;
 	public static final int JUMP=1;
 	public static final int DYING=2;
+	private int             posicao;
 
 	public Bart() {
 		estados = new GameObject[3];
 		estados[RUN] = new GameObject(ModelFactory.getModelbyName("BartRun"));
 		estados[JUMP] = new GameObject(ModelFactory.getModelbyName("BartJump"));
 		estados[DYING] = new GameObject(ModelFactory.getModelbyName("BartDying"));
+		
+		posicao = 0;
 
 		settings();
 	}
@@ -54,15 +57,29 @@ public class Bart {
 	}
 	
 	public void direita() {
-        estado = JUMP;
-        for (GameObject estado: estados) {
-            estado.transform.translate(-1f,0,0);
+        estado = JUMP;               
+        
+        if (posicao < 2) {
+	        for (GameObject estado: estados) {
+	            estado.transform.translate(-1f,0,0);
+	        }
+	        posicao++;
+        }
+        else {
+        	posicao = 2;
         }
 	}
 	public void esquerda() {
-        estado = JUMP;
-        for (GameObject estado: estados) {
-            estado.transform.translate(1f,0,0);
+        estado = JUMP;               
+        
+        if (posicao > -2) {
+	        for (GameObject estado: estados) {
+	            estado.transform.translate(1f,0,0);
+	        }
+	        posicao--;
+        }
+        else {
+        	posicao = -2;
         }
 	}
 
