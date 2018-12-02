@@ -16,7 +16,8 @@ import br.edu.ufabc.screen.AbstractScreen;
 public class JogoProjeto extends ApplicationAdapter {
 	SpriteBatch            batch;
 	Texture                img;
-	private AbstractScreen currentScreen;	
+	private AbstractScreen currentScreen;
+	private int            maxScore = 0;
 	
 	@Override
 	public void create () {
@@ -36,14 +37,15 @@ public class JogoProjeto extends ApplicationAdapter {
 		currentScreen.render(Gdx.graphics.getDeltaTime());
 		if (currentScreen.isDone()) {
 			if (currentScreen.getId().equals("START")) {
-				currentScreen = new GameScreen("GAME");
+				currentScreen = new GameScreen("GAME", 0);
 			}
 			else if (currentScreen.getId().equals("GAME")) {
+				maxScore = currentScreen.getMaxScore();
 				currentScreen = new CreditsScreen("CREDITS");
 			}
 			else if (currentScreen.getId().equals("CREDITS")) {
 				if (currentScreen.getTryAgain()) {
-					currentScreen = new GameScreen("GAME");
+					currentScreen = new GameScreen("GAME", maxScore);
 				}
 				else {
 					currentScreen = new StartScreen("START");

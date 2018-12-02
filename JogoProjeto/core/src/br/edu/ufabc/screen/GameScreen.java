@@ -56,7 +56,7 @@ public class GameScreen extends AbstractScreen{
     
 	//////////////////////////////////////////////////
 
-	public GameScreen(String id) {
+	public GameScreen(String id, int maxScore) {
 		super(id);
 		modelBatch = new ModelBatch();
 
@@ -89,6 +89,8 @@ public class GameScreen extends AbstractScreen{
 		viewMatrix = new Matrix4();
 		zcaminho = -80;
 		countcaminho = 0;
+		
+		setMaxScore(maxScore);
 
         setupAlternanciaCaminhos();
         
@@ -160,6 +162,9 @@ public class GameScreen extends AbstractScreen{
 		countcaminho+=speed;
 		pontos+=0.01*speed;
 		if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
+			if ((int) pontos > getMaxScore()) {
+				setMaxScore((int)pontos);
+			}		
 			gameMusic.dispose();
 			setDone(true);
 		}
@@ -172,7 +177,10 @@ public class GameScreen extends AbstractScreen{
 					g.update(1);        	
 			}		
 		}
-		else {			
+		else {
+			if ((int) pontos > getMaxScore()) {
+				setMaxScore((int)pontos);
+			}
 			Bart.morrer();
 			Bart.update(delta);
 			gameMusic.dispose();
@@ -240,6 +248,7 @@ public class GameScreen extends AbstractScreen{
 		spriteBatch.begin();
 		//pontos+=1;
 		font.draw(spriteBatch, "Score\n" + (int) pontos, 10, 550);
+		font.draw(spriteBatch, "MaxScore\n" + (int) getMaxScore(), 330, 550);
 		font.draw(spriteBatch, "Lifes\n" + (int) vidas, 670, 550);
 		spriteBatch.end();
 		

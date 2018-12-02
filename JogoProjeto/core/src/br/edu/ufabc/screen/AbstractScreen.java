@@ -8,9 +8,11 @@ public abstract class AbstractScreen implements Screen{
 	private boolean        done; 
 	private String         id;
 	private boolean        setTryAgain;
+	private int         maxScore;
 	
 	public AbstractScreen(String id) {
 		this.id = id;
+		setMaxScore(0);
 	}
 	
 	public boolean getTryAgain() {  
@@ -64,6 +66,12 @@ public abstract class AbstractScreen implements Screen{
 	public void dispose() {
 		// TODO Auto-generated method stub
 		
+	}
+	public int getMaxScore() {
+		return maxScore;
+	}
+	public void setMaxScore(int maxScore) {
+		this.maxScore = maxScore;
 	}
 
 }
