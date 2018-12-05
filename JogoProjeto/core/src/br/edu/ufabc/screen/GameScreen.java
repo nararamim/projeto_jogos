@@ -121,7 +121,7 @@ public class GameScreen extends AbstractScreen{
 			updateObstaculos();
 	        for(GameObject h: objetos) {
 	        	System.out.println(objetos.size());
-	        	h.transform.translate(0,0,speed);
+	        	h.transform.translate(0,0,speed*100);
 	        	h.update(1);
 	        }	        
 		}
@@ -212,7 +212,7 @@ public class GameScreen extends AbstractScreen{
             GameObject objeto = new GameObject(ModelFactory.getModelbyName("rato"));
             Vector3 pos = new Vector3();
             pos.x = 0;
-            pos.y = 0;
+            pos.y = -20;
             pos.z = zobj;
             zobj-=190;
             objeto.transform.translate(pos);
@@ -279,17 +279,17 @@ public class GameScreen extends AbstractScreen{
     }
     
     private void updateObstaculos() {
-    	if(countobstaculo >= 190) {
+    	if(countobstaculo >= 250) {
     		GameObject objeto = new GameObject(ModelFactory.getModelbyName("rato"));
     		Vector3 pos = new Vector3();
             pos.x = 0;
-            pos.y = 0;
+            pos.y = -20;
             pos.z = -600;
             objeto.transform.translate(pos);
             objeto.transform.scale(0.01f, 0.01f, 0.01f );
             objeto.update(1);
             objetos.add(objeto);
-            countobstaculo-=190;
+            countobstaculo-=250;
             objetos.remove(0);    		
     	}
     }
