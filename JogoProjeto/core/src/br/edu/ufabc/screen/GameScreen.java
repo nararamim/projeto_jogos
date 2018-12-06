@@ -126,11 +126,16 @@ public class GameScreen extends AbstractScreen{
 	        }	        
 		}
 		else {
-			if ((int) pontos > getMaxScore()) setMaxScore((int)pontos);
+			if ((int) pontos > getMaxScore()) {
+				setMaxScore((int)pontos);
+			}
+			
 			Bart.morrer();
-			Bart.update(delta);
-			gameMusic.dispose();
-			setDone(true);
+			
+			if (Bart.getEndGame()) {				
+				gameMusic.dispose();
+				setDone(true);
+			}
 		}
 
 		// teclas de jogo
@@ -138,8 +143,7 @@ public class GameScreen extends AbstractScreen{
 		if(Gdx.input.isKeyJustPressed(Keys.RIGHT) || Gdx.input.isButtonPressed(Buttons.RIGHT)) Bart.direita();
 		if(Gdx.input.isKeyJustPressed(Keys.LEFT) || Gdx.input.isButtonPressed(Buttons.LEFT)) Bart.esquerda();
         if(Gdx.input.isKeyJustPressed(Keys.SPACE)) {
-        	vidas--;
-            Bart.morrer();
+        	vidas--;            
         }		
 		Bart.update(delta);
         checkColisions();

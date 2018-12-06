@@ -35,8 +35,7 @@ public class GameObject extends ModelInstance {
         animationController = new AnimationController(this);
         if (animations.size > 0) {
             animationController.setAnimation(this.animations.get(0).id, -1,
-                    new AnimationController.AnimationListener() {
-
+                    new AnimationController.AnimationListener() {		            	
                         @Override
                         public void onLoop(AnimationDesc animation) {
                             // TODO Auto-generated method stub

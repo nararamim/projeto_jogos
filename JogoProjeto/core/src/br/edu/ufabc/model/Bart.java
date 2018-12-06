@@ -12,6 +12,7 @@ public class Bart {
 	public static final int JUMP=1;
 	public static final int DYING=2;
 	private int             posicao;
+	private boolean         endGame = false;
 
 	public Bart() {
 		estados = new GameObject[3];
@@ -43,6 +44,10 @@ public class Bart {
         if (estado == JUMP && estados[estado].isDone()) {
             estados[estado].reset();
             estado = RUN;
+        }
+        
+        if (estado == DYING && estados[estado].isDone()) {
+        	setEndGame(true);
         }
 	}
 		
@@ -88,6 +93,14 @@ public class Bart {
 	}
 	public GameObject getCurrent() {
 		return estados[estado];
+	}
+
+	public boolean getEndGame() {
+		return this.endGame;
+	}
+
+	public void setEndGame(boolean endGame) {
+		this.endGame = endGame;
 	}
 
 }
