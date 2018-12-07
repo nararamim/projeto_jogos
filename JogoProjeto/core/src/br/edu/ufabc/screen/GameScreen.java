@@ -1,6 +1,7 @@
 package br.edu.ufabc.screen;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
@@ -13,9 +14,11 @@ import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g3d.Environment;
+import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
+import com.badlogic.gdx.graphics.g3d.attributes.BlendingAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.graphics.g3d.loader.G3dModelLoader;
@@ -103,7 +106,7 @@ public class GameScreen extends AbstractScreen{
 	@Override
 	public void update(float delta) {
 		countcaminho+=speed;
-		countobstaculo+=speed;
+		countobstaculo+=0.57*speed;
 		pontos+=0.01*speed;
 		if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
 			if ((int) pontos > getMaxScore()) {
@@ -212,13 +215,14 @@ public class GameScreen extends AbstractScreen{
     private void addObstaculo() {
         //int zobj = 100;
         int zobj = -80;
-        for (int i = 0 ; i < 3; i ++) {
+        for (int i = 0 ; i < 4; i ++) {
             GameObject objeto = new GameObject(ModelFactory.getModelbyName("rato"));
+            for(Material m : objeto.materials) m.set(new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA));
             Vector3 pos = new Vector3();
-            pos.x = 0;
+            pos.x = chosePosition();
             pos.y = -20;
             pos.z = zobj;
-            zobj-=190;
+            zobj-=250;
             objeto.transform.translate(pos);
             objeto.transform.scale(0.01f, 0.01f, 0.01f );
             objeto.update(1);
@@ -285,8 +289,9 @@ public class GameScreen extends AbstractScreen{
     private void updateObstaculos() {
     	if(countobstaculo >= 250) {
     		GameObject objeto = new GameObject(ModelFactory.getModelbyName("rato"));
+    		for(Material m : objeto.materials) m.set(new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA));
     		Vector3 pos = new Vector3();
-            pos.x = 0;
+            pos.x = chosePosition();
             pos.y = -20;
             pos.z = -600;
             objeto.transform.translate(pos);
@@ -296,5 +301,10 @@ public class GameScreen extends AbstractScreen{
             countobstaculo-=250;
             objetos.remove(0);    		
     	}
+    }
+    
+    private int chosePosition() {
+    	Random rand = new Random();
+    	return 35*(rand.nextInt(3)-1);
     }
 }
