@@ -128,15 +128,14 @@ public class GameScreen extends AbstractScreen{
 	        	h.update(1);
 	        }	        
 		}
-		else {
-			if ((int) pontos > getMaxScore()) {
-				setMaxScore((int)pontos);
-			}
-			
+		else {						
 			Bart.morrer();
 			
 			if (Bart.getEndGame()) {				
 				gameMusic.dispose();
+				if ((int) pontos > getMaxScore()) {
+					setMaxScore((int)pontos);
+				}
 				setDone(true);
 			}
 		}
