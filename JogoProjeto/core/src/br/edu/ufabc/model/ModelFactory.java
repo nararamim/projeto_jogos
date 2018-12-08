@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.UBJsonReader;
 public class ModelFactory {
 	
 	private static HashMap<String, Model> modelos = new HashMap<String,Model>();
+
 	
 	static {
 		ModelLoader<ModelParameters> loader;
@@ -37,5 +38,7 @@ public class ModelFactory {
 	public static Model getModelbyName(String name) {
 		return modelos.get(name);
 	}
+	
+
 
 }

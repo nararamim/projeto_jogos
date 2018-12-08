@@ -16,6 +16,7 @@ public class GameObject extends ModelInstance {
 	private BoundingBox boundingBox;
 	private Vector3     originalMax;
 	private Vector3     originalMin;
+	private float resize;
 
 	public GameObject(Model model) {
 		super(model);
@@ -77,6 +78,14 @@ public class GameObject extends ModelInstance {
 	
 	public boolean collidesWith(GameObject other) {
 		return this.boundingBox.intersects(other.boundingBox);
+	}
+	
+	public void setResize(float resize) {
+		this.resize = resize;
+	}
+	
+	public float getResize() {
+		return this.resize;
 	}
 
 }

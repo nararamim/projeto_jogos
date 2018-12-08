@@ -1,5 +1,6 @@
 package br.edu.ufabc.screen;
 
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -30,6 +31,7 @@ import com.badlogic.gdx.utils.UBJsonReader;
 import br.edu.ufabc.model.Bart;
 import br.edu.ufabc.model.GameObject;
 import br.edu.ufabc.model.ModelFactory;
+import br.edu.ufabc.model.RandObstaculo;
 import br.edu.ufabc.util.Parameters;
 
 public class GameScreen extends AbstractScreen{
@@ -57,6 +59,8 @@ public class GameScreen extends AbstractScreen{
     private Music           			gameMusic;
     private float 						countobstaculo;
     
+    GameObject pedra;
+    
 	//////////////////////////////////////////////////
 
 	public GameScreen(String id, int maxScore) {
@@ -81,21 +85,6 @@ public class GameScreen extends AbstractScreen{
         setupAlternanciaCaminhos();
         addObstaculo();
         musicInitialization();
-		        
-        
-        // TODO: adicionar demais objetos
-        /*for (int i = 0 ; i < 20; i ++) {
-            GameObject objeto = new GameObject(ModelFactory.getModelbyName("rato"));
-            Vector3 pos = new Vector3();
-            pos.x = 0;
-            pos.y = 0;
-            pos.z = zobj;
-            zobj-=190;
-            objeto.transform.translate(pos);
-            //objeto.transform.scale(0.01f, 0.01f, 0.01f );
-            objeto.update(1);
-            objetos.add(objeto);
-        }		*/
 	}
 
     @Override
@@ -123,14 +112,14 @@ public class GameScreen extends AbstractScreen{
 			}
 			updateObstaculos();
 	        for(GameObject h: objetos) {
-	        	System.out.println(objetos.size());
-	        	h.transform.translate(0,0,speed*100);
+	        	//System.out.println(objetos.size());
+	        	h.transform.translate(0,0,speed*(1/h.getResize()));
 	        	h.update(1);
 	        }	        
 		}
-		else {						
+		else {
 			Bart.morrer();
-			
+
 			if (Bart.getEndGame()) {				
 				gameMusic.dispose();
 				if ((int) pontos > getMaxScore()) {
@@ -165,7 +154,6 @@ public class GameScreen extends AbstractScreen{
 		for(GameObject h : objetos) modelBatch.render(h,environment);
 		for(ModelInstance m: ceus) modelBatch.render(m, environment);
 		
-		
 		modelBatch.end();
 		
 		camera.update();
@@ -173,7 +161,6 @@ public class GameScreen extends AbstractScreen{
 		viewMatrix.setToOrtho2D(0, 0, Parameters.GAME_WIDTH, Parameters.GAME_HEIGHT);
 		spriteBatch.setProjectionMatrix(viewMatrix);
 		spriteBatch.begin();
-		//pontos+=1;
 		font.draw(spriteBatch, "Score\n" + (int) pontos, 10, 550);
 		font.draw(spriteBatch, "MaxScore\n" + (int) getMaxScore(), 330, 550);
 		font.draw(spriteBatch, "Lifes\n" + (int) vidas, 670, 550);
@@ -206,25 +193,17 @@ public class GameScreen extends AbstractScreen{
             zcaminho-=190;
             caminho.transform.translate(pos);
             caminho.update(1);
-
             caminhos.add(caminho);
         }
     }
     
     private void addObstaculo() {
-        //int zobj = 100;
-        int zobj = -80;
-        for (int i = 0 ; i < 4; i ++) {
-            GameObject objeto = new GameObject(ModelFactory.getModelbyName("rato"));
-            for(Material m : objeto.materials) m.set(new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA));
-            Vector3 pos = new Vector3();
-            pos.x = chosePosition();
-            pos.y = -20;
-            pos.z = zobj;
-            zobj-=250;
-            objeto.transform.translate(pos);
-            objeto.transform.scale(0.01f, 0.01f, 0.01f );
-            objeto.update(1);
+    	RandObstaculo rn = new RandObstaculo();
+        float zobj = -450;
+        for (int i = 0 ; i < 2; i ++) {
+        	
+    		GameObject objeto = rn.getObstaculo(zobj);
+    		zobj-=250;
             objetos.add(objeto);
         }		
     }
@@ -287,23 +266,12 @@ public class GameScreen extends AbstractScreen{
     
     private void updateObstaculos() {
     	if(countobstaculo >= 250) {
-    		GameObject objeto = new GameObject(ModelFactory.getModelbyName("rato"));
-    		for(Material m : objeto.materials) m.set(new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA));
-    		Vector3 pos = new Vector3();
-            pos.x = chosePosition();
-            pos.y = -20;
-            pos.z = -600;
-            objeto.transform.translate(pos);
-            objeto.transform.scale(0.01f, 0.01f, 0.01f );
-            objeto.update(1);
+    		RandObstaculo rn = new RandObstaculo();
+    		GameObject objeto = rn.getObstaculo(-600);
             objetos.add(objeto);
             countobstaculo-=250;
             objetos.remove(0);    		
     	}
-    }
-    
-    private int chosePosition() {
-    	Random rand = new Random();
-    	return 35*(rand.nextInt(3)-1);
-    }
+    }    
+
 }
