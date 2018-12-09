@@ -18,6 +18,7 @@ public class GameObject extends ModelInstance {
 	private Vector3     originalMin;
 	private float resize;
 
+	
 	public GameObject(Model model) {
 		super(model);
 		done = false;

@@ -12,13 +12,13 @@ public class RandObstaculo {
 	
 	public GameObject getObstaculo(float z) {
 		Random rand = new Random();
-		int obs = rand.nextInt(9); //eu usaria 4
+		int obs = rand.nextInt(1); //eu usaria 4
 		GameObject objeto;
 		Vector3 pos;
-		System.out.println(obs);
+		//System.out.println(obs);
 		switch(obs) {
 			case 0: //rato
-				objeto = new GameObject(ModelFactory.getModelbyName("rato"));
+				objeto = new GameObject(ModelFactory.getModelbyName("rato"));				
 				objeto.setResize(0.01f);
 	    		for(Material m : objeto.materials) m.set(new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA));
 	    		pos = new Vector3();
