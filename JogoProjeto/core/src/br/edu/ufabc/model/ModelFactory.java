@@ -25,11 +25,8 @@ public class ModelFactory {
 	     modelos.put("rato", loader.loadModel(Gdx.files.internal("rat.g3db")));
 	     modelos.put("pedra_um", loader.loadModel(Gdx.files.internal("rock.g3db")));
 	     modelos.put("pedra_dois", loader.loadModel(Gdx.files.internal("big_rock.g3db")));
-	     modelos.put("parede", loader.loadModel(Gdx.files.internal("wall.g3db")));
 	     modelos.put("arvore_um", loader.loadModel(Gdx.files.internal("tree.g3db")));
-	     modelos.put("arvore_dois", loader.loadModel(Gdx.files.internal("tree2.g3db")));
 	     modelos.put("planta", loader.loadModel(Gdx.files.internal("plant.g3db")));
-	     modelos.put("monstro", loader.loadModel(Gdx.files.internal("monster.g3db")));
 	     modelos.put("cachorro", loader.loadModel(Gdx.files.internal("dog.g3db")));
 	     modelos.put("rato1", loader.loadModel(Gdx.files.internal("rat1.g3db")));
 
