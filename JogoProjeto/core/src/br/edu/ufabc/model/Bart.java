@@ -30,7 +30,7 @@ public class Bart {
 
 	private void settings() {
 		for (GameObject estado : estados) {
-			estado.transform.scale(20, 20, 20);
+			//estado.transform.scale(20, 20, 20);
 			estado.transform.rotate(Vector3.Y, 180);
 			estado.transform.translate(0, 0.5f, 0);
 
@@ -54,20 +54,20 @@ public class Bart {
 		}
 
 		if (updatingcolunadir) {
-			if (moving < 1) {
-				moving += 0.025f;
+			if (moving < 20) {
+				moving += 0.5f;
 				for (GameObject estado : estados)
-					estado.transform.translate(-0.025f, 0, 0);
+					estado.transform.translate(-0.5f, 0, 0);
 			} else {
 				moving = 0;
 				updatingcolunadir = false;
 			}
 		}
 		if (updatingcolunaesq) {
-			if (moving < 1) {
-				moving += 0.025f;
+			if (moving < 20) {
+				moving += 0.5f;
 				for (GameObject estado : estados)
-					estado.transform.translate(0.025f, 0, 0);
+					estado.transform.translate(0.5f, 0, 0);
 			} else {
 				moving = 0;
 				updatingcolunaesq = false;

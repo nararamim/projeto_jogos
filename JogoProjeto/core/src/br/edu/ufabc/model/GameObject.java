@@ -79,14 +79,6 @@ public class GameObject extends ModelInstance {
 	
 	public boolean collidesWith(GameObject other) {
 		return this.boundingBox.intersects(other.boundingBox);
-	}
-	
-	public void setResize(float resize) {
-		this.resize = resize;
-	}
-	
-	public float getResize() {
-		return this.resize;
-	}
+	}	
 
 }

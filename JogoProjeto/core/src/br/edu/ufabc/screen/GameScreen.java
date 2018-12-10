@@ -115,7 +115,7 @@ public class GameScreen extends AbstractScreen{
 			updateObstaculos();
 	        for(GameObject h: objetos) {
 	        	//System.out.println(objetos.size());
-	        	h.transform.translate(0,0,speed*(1/h.getResize()));
+	        	h.transform.translate(0,0,speed);
 	        	h.update(1);
 	        }	        
 		}

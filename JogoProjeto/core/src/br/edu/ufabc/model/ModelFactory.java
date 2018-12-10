@@ -18,13 +18,13 @@ public class ModelFactory {
 		ModelLoader<ModelParameters> loader;
 		loader = new G3dModelLoader(new UBJsonReader());
 		//System.out.println("Carregando modelos...");
-	     modelos.put("BartRun", loader.loadModel(Gdx.files.internal("Running.g3db")));
-	     modelos.put("BartJump", loader.loadModel(Gdx.files.internal("Jump.g3db")));
-	     modelos.put("BartDying", loader.loadModel(Gdx.files.internal("dying.g3db")));
+	     modelos.put("BartRun", loader.loadModel(Gdx.files.internal("Running2.g3db")));
+	     modelos.put("BartJump", loader.loadModel(Gdx.files.internal("Jump2.g3db")));
+	     modelos.put("BartDying", loader.loadModel(Gdx.files.internal("dying2.g3db")));
 	     modelos.put("chao", loader.loadModel(Gdx.files.internal("chao.g3db")));
 	     modelos.put("rato", loader.loadModel(Gdx.files.internal("rat.g3db")));
 	     modelos.put("pedra_um", loader.loadModel(Gdx.files.internal("rock.g3db")));
-	     modelos.put("pedra_dois", loader.loadModel(Gdx.files.internal("big_rock.g3db")));
+	     modelos.put("pedra_dois", loader.loadModel(Gdx.files.internal("big_rock2.g3db")));
 	     modelos.put("arvore_um", loader.loadModel(Gdx.files.internal("tree.g3db")));
 	     modelos.put("planta", loader.loadModel(Gdx.files.internal("plant.g3db")));
 	     modelos.put("cachorro", loader.loadModel(Gdx.files.internal("dog.g3db")));
