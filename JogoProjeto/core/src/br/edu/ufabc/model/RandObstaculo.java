@@ -12,21 +12,20 @@ public class RandObstaculo {
 	
 	public GameObject getObstaculo(float z) {
 		Random rand = new Random();
-		int obs = rand.nextInt(10); //eu usaria 4
+		int obs = rand.nextInt(2); //eu usaria 4
 		GameObject objeto;
 		Vector3 pos;
 		//System.out.println(obs);
 		switch(obs) {
 			case 0: //rato
-				objeto = new GameObject(ModelFactory.getModelbyName("rato"));				
-				objeto.setResize(0.01f);
+				objeto = new GameObject(ModelFactory.getModelbyName("rato1"));//rato com scale do blender
+				objeto.setResize(0.55f);
 	    		for(Material m : objeto.materials) m.set(new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA));
 	    		pos = new Vector3();
 	            pos.x = chosePosition(3);
 	            pos.y = -20;
 	            pos.z = z;
 	            objeto.transform.translate(pos);
-	            objeto.transform.scale(0.01f, 0.01f, 0.01f );
 	            objeto.update(1);
 	            return objeto;
 			case 1: //pedra1
@@ -102,15 +101,13 @@ public class RandObstaculo {
 	            objeto.update(1);
 	            return objeto;
 			default:
-				objeto = new GameObject(ModelFactory.getModelbyName("rato"));
-				objeto.setResize(0.01f);
+				objeto = new GameObject(ModelFactory.getModelbyName("rato1"));
 	    		for(Material m : objeto.materials) m.set(new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA));
 	    		pos = new Vector3();
 	            pos.x = chosePosition(3);
 	            pos.y = -20;
 	            pos.z = z;
 	            objeto.transform.translate(pos);
-	            objeto.transform.scale(0.01f, 0.01f, 0.01f );
 	            objeto.update(1);
 	            return objeto;
 		}		

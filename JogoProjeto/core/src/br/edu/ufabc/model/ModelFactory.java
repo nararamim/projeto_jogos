@@ -31,6 +31,7 @@ public class ModelFactory {
 	     modelos.put("planta", loader.loadModel(Gdx.files.internal("plant.g3db")));
 	     modelos.put("monstro", loader.loadModel(Gdx.files.internal("monster.g3db")));
 	     modelos.put("cachorro", loader.loadModel(Gdx.files.internal("dog.g3db")));
+	     modelos.put("rato1", loader.loadModel(Gdx.files.internal("rat1.g3db")));
 
 	     //System.out.println("Modelos carregados!");
 	}
