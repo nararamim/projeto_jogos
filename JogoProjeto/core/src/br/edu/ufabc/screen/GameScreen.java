@@ -40,6 +40,8 @@ public class GameScreen extends AbstractScreen{
 	private Environment      	 		environment;
 	private ModelBatch     	  	 	 	modelBatch;
 	private ArrayList<ModelInstance>    ceus;
+	private boolean                     bartVisible = true;
+	private double                      tempo;
 	//private ModelInstance  			 	modelo3D;
 	//private CameraInputController	 	inputController;
 	
@@ -133,9 +135,20 @@ public class GameScreen extends AbstractScreen{
 		if(Gdx.input.isKeyJustPressed(Keys.UP) || Gdx.input.isButtonPressed(Buttons.MIDDLE)) Bart.pular();
 		if(Gdx.input.isKeyJustPressed(Keys.RIGHT) || Gdx.input.isButtonPressed(Buttons.RIGHT)) Bart.direita();
 		if(Gdx.input.isKeyJustPressed(Keys.LEFT) || Gdx.input.isButtonPressed(Buttons.LEFT)) Bart.esquerda();
-        if(Gdx.input.isKeyJustPressed(Keys.SPACE)) {
-        	vidas--;            
-        }		
+        if(Gdx.input.isKeyJustPressed(Keys.SPACE)) {             	
+        	vidas--;
+        	
+        	if (vidas > 0) {
+        		bartVisible = !bartVisible;
+        	}
+        }
+        
+        tempo += Gdx.graphics.getDeltaTime();
+	    if (tempo >= 0.07f && vidas > 0)  {    	        	
+	    	bartVisible = true;
+	    	tempo = 0;
+	    }
+        
 		Bart.update(delta);
         checkColisions();
 	}
@@ -148,7 +161,10 @@ public class GameScreen extends AbstractScreen{
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		
 		modelBatch.begin(camera);
-		modelBatch.render(Bart.getCurrent(), environment);
+		
+		if (bartVisible) {
+			modelBatch.render(Bart.getCurrent(), environment);
+		}
 		
 		for(GameObject g : caminhos) modelBatch.render(g,environment);
 		for(GameObject h : objetos) modelBatch.render(h,environment);
@@ -172,9 +188,14 @@ public class GameScreen extends AbstractScreen{
     public void checkColisions() {
         for (GameObject g : objetos) {
             if (g.collidesWith(Bart.getCurrent())) {
+            	//vidas--;
+            	if (vidas > 0) {
+            		//bartVisible = !bartVisible;
+            	}
+            	
                 System.out.println("Bart trombou no objeto");
-                trombou = true;
-                //vidas--;
+                
+                trombou = true;                                              
                 break;
             } else {
                 trombou = false;

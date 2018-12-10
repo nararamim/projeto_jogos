@@ -12,7 +12,7 @@ public class RandObstaculo {
 	
 	public GameObject getObstaculo(float z) {
 		Random rand = new Random();
-		int obs = rand.nextInt(1); //eu usaria 4
+		int obs = rand.nextInt(10); //eu usaria 4
 		GameObject objeto;
 		Vector3 pos;
 		//System.out.println(obs);
@@ -99,31 +99,6 @@ public class RandObstaculo {
 	            pos.z = z;
 	            objeto.transform.translate(pos);
 	            objeto.transform.scale(0.8f, 0.8f, 0.8f);
-	            objeto.update(1);
-	            return objeto;
-			case 7:
-				objeto = new GameObject(ModelFactory.getModelbyName("arvore_dois"));
-				objeto.setResize(0.8f);
-	    		for(Material m : objeto.materials) m.set(new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA));
-	    		pos = new Vector3();
-	            pos.x = chosePosition(3);
-	            pos.y = -25;
-	            pos.z = z;
-	            objeto.transform.translate(pos);
-	            objeto.transform.scale(0.8f, 0.8f, 0.8f);
-	            objeto.update(1);
-	            return objeto;
-			case 8:
-				objeto = new GameObject(ModelFactory.getModelbyName("parede"));
-				objeto.setResize(0.3f);
-	    		for(Material m : objeto.materials) m.set(new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA));
-	    		pos = new Vector3();
-	    		if(chosePosition(2)<0) pos.x = -35;
-	    		else pos.x= 35;
-	            pos.y = -20;
-	            pos.z = z;
-	            objeto.transform.translate(pos);
-	            objeto.transform.scale(0.3f, 0.8f, 0.3f);
 	            objeto.update(1);
 	            return objeto;
 			default:
