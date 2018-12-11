@@ -182,8 +182,8 @@ public class GameScreen extends AbstractScreen{
 		spriteBatch.setProjectionMatrix(viewMatrix);
 		spriteBatch.begin();
 		font.draw(spriteBatch, "Score\n" + (int) pontos, 10, 550);
-		font.draw(spriteBatch, "MaxScore\n" + (int) getMaxScore(), 330, 550);
-		font.draw(spriteBatch, "Health\n" + (int) vidas, 670, 550);
+		font.draw(spriteBatch, "MaxScore\n" + (int) getMaxScore(), 300, 550);
+		font.draw(spriteBatch, "Health\n" + (int) vidas, 630, 550);
 		spriteBatch.end();
 		
 		///////////////////////////////////////
