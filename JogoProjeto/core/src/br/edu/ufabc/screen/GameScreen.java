@@ -25,7 +25,6 @@ import com.badlogic.gdx.graphics.g3d.loader.G3dModelLoader;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.UBJsonReader;
-
 import java.util.ArrayList;
 
 public class GameScreen extends AbstractScreen{
@@ -182,8 +181,8 @@ public class GameScreen extends AbstractScreen{
 		spriteBatch.setProjectionMatrix(viewMatrix);
 		spriteBatch.begin();
 		font.draw(spriteBatch, "Score\n" + (int) pontos, 10, 550);
-		font.draw(spriteBatch, "MaxScore\n" + (int) getMaxScore(), 300, 550);
-		font.draw(spriteBatch, "Health\n" + (int) vidas + "%" , 630, 550);
+		font.draw(spriteBatch, "MaxScore\n" + (int) getMaxScore(), 330, 550);
+		font.draw(spriteBatch, "Lifes\n" + (int) vidas, 670, 550);
 		spriteBatch.end();
 		
 		///////////////////////////////////////
@@ -192,8 +191,6 @@ public class GameScreen extends AbstractScreen{
     public void checkColisions() {
         for (GameObject g : objetos) {
              if (g.collidesWith(Bart.getCurrent()) && (vidas>0)) {
-            	vidas= vidas - 0.7f;
-
             	if(g.getTipo() == 'a' && !(Bart.getPosicao() == g.getPos())) {
             		trombou = false;
             		break;
@@ -201,6 +198,7 @@ public class GameScreen extends AbstractScreen{
             		trombou = false;
             		break;
             	}else if (vidas > 0) {
+                    vidas= vidas - 0.7f;
                     bartVisible = !bartVisible;
             	}
             	collisionSound.play();
