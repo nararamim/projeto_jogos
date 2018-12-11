@@ -59,6 +59,7 @@ public class GameScreen extends AbstractScreen{
     private boolean                     trombou;
     private float						speed = 3f;
     private Music           			gameMusic;
+    private Music           			jumpSound;
     private float 						countobstaculo;
     
     GameObject pedra;
@@ -132,9 +133,18 @@ public class GameScreen extends AbstractScreen{
 		}
 
 		// teclas de jogo
-		if(Gdx.input.isKeyJustPressed(Keys.UP) || Gdx.input.isButtonPressed(Buttons.MIDDLE)) Bart.pular();
-		if(Gdx.input.isKeyJustPressed(Keys.RIGHT) || Gdx.input.isButtonPressed(Buttons.RIGHT)) Bart.direita();
-		if(Gdx.input.isKeyJustPressed(Keys.LEFT) || Gdx.input.isButtonPressed(Buttons.LEFT)) Bart.esquerda();
+		if(Gdx.input.isKeyJustPressed(Keys.UP) || Gdx.input.isButtonPressed(Buttons.MIDDLE)) {
+			jumpSound.play();
+			Bart.pular();
+		}
+		if(Gdx.input.isKeyJustPressed(Keys.RIGHT) || Gdx.input.isButtonPressed(Buttons.RIGHT)) {
+			jumpSound.play();
+			Bart.direita();
+		}
+		if(Gdx.input.isKeyJustPressed(Keys.LEFT) || Gdx.input.isButtonPressed(Buttons.LEFT)) {
+			jumpSound.play();
+			Bart.esquerda();
+		}
         if(Gdx.input.isKeyJustPressed(Keys.SPACE)) {             	
         	vidas--;
         	
@@ -234,6 +244,9 @@ public class GameScreen extends AbstractScreen{
     	gameMusic.setVolume(0.5f);
     	gameMusic.setLooping(true);
     	gameMusic.play();
+    	
+    	jumpSound = Gdx.audio.newMusic(Gdx.files.internal("music/jump.wav"));
+    	jumpSound.setVolume(0.25f);
     }
 
     private void setFonts() {
