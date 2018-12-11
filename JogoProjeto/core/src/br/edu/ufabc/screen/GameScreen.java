@@ -60,6 +60,8 @@ public class GameScreen extends AbstractScreen{
     private float						speed = 3f;
     private Music           			gameMusic;
     private Music           			jumpSound;
+    private Music           			collisionSound;
+    private Music           			nolifeSound;
     private float 						countobstaculo;
     
     GameObject pedra;
@@ -121,13 +123,14 @@ public class GameScreen extends AbstractScreen{
 	        }	        
 		}
 		else {
-			Bart.morrer();
-
-			if (Bart.getEndGame()) {				
-				gameMusic.dispose();
+			gameMusic.dispose();			
+			Bart.morrer();		
+			nolifeSound.play();			
+			if (Bart.getEndGame()) {								
 				if ((int) pontos > getMaxScore()) {
 					setMaxScore((int)pontos);
 				}
+				nolifeSound.dispose();
 				setDone(true);
 			}
 		}
@@ -203,6 +206,8 @@ public class GameScreen extends AbstractScreen{
             		//bartVisible = !bartVisible;
             	}
             	
+            	collisionSound.play();
+            	
                 System.out.println("Bart trombou no objeto");
                 
                 trombou = true;                                              
@@ -247,6 +252,12 @@ public class GameScreen extends AbstractScreen{
     	
     	jumpSound = Gdx.audio.newMusic(Gdx.files.internal("music/jump.wav"));
     	jumpSound.setVolume(0.25f);
+    	
+    	collisionSound = Gdx.audio.newMusic(Gdx.files.internal("music/collision.mp3"));;
+    	collisionSound.setVolume(0.8f);;
+    	
+    	nolifeSound = Gdx.audio.newMusic(Gdx.files.internal("music/no_life.wav"));;
+    	nolifeSound.setVolume(0.8f);;
     }
 
     private void setFonts() {

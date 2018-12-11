@@ -76,7 +76,6 @@ public class Bart {
 	}
 
 	public void pular() {
-		// TODO Lógica de pular em parábola
 		estado = JUMP;
 	}
 
