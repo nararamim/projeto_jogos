@@ -17,6 +17,8 @@ public class GameObject extends ModelInstance {
 	private Vector3     originalMax;
 	private Vector3     originalMin;
 	private float resize;
+	private int pos;
+	private char tipo; //s - simples (pedra1 e rato); a - arvore ; p - pedra grande
 
 	
 	public GameObject(Model model) {
@@ -79,6 +81,21 @@ public class GameObject extends ModelInstance {
 	
 	public boolean collidesWith(GameObject other) {
 		return this.boundingBox.intersects(other.boundingBox);
-	}	
-
+	}		
+	
+	public void setPos(int i) {
+		this.pos = i;
+	}
+	
+	public int getPos() {
+		return this.pos;
+	}
+	
+	public void setTipo(char i) {
+		this.tipo = i;
+	}
+	
+	public char getTipo() {
+		return this.tipo;
+	}
 }

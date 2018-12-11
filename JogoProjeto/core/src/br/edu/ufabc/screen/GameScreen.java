@@ -59,10 +59,10 @@ public class GameScreen extends AbstractScreen{
     private boolean                     trombou;
     private float						speed = 3f;
     private Music           			gameMusic;
+    private float 						countobstaculo;
     private Music           			jumpSound;
     private Music           			collisionSound;
     private Music           			nolifeSound;
-    private float 						countobstaculo;
     
     GameObject pedra;
     
@@ -100,7 +100,7 @@ public class GameScreen extends AbstractScreen{
 	@Override
 	public void update(float delta) {
 		countcaminho+=speed;
-		countobstaculo+=0.57*speed;
+		countobstaculo+=0.47*speed;
 		pontos+=0.01*speed;
 		if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
 			if ((int) pontos > getMaxScore()) {
@@ -125,8 +125,9 @@ public class GameScreen extends AbstractScreen{
 		else {
 			gameMusic.dispose();			
 			Bart.morrer();		
-			nolifeSound.play();			
-			if (Bart.getEndGame()) {								
+			nolifeSound.play();
+			if (Bart.getEndGame()) {				
+				gameMusic.dispose();
 				if ((int) pontos > getMaxScore()) {
 					setMaxScore((int)pontos);
 				}
@@ -157,7 +158,7 @@ public class GameScreen extends AbstractScreen{
         }
         
         tempo += Gdx.graphics.getDeltaTime();
-	    if (tempo >= 0.07f && vidas > 0)  {    	        	
+	    if (tempo >= 0.065f && vidas > 0)  {    	        	
 	    	bartVisible = true;
 	    	tempo = 0;
 	    }
@@ -197,17 +198,24 @@ public class GameScreen extends AbstractScreen{
 		
 		///////////////////////////////////////
 	}
+    
+    
 
     public void checkColisions() {
         for (GameObject g : objetos) {
             if (g.collidesWith(Bart.getCurrent())) {
             	//vidas--;
-            	if (vidas > 0) {
+            	if(g.getTipo() == 'a' && !(Bart.getPosicao() == g.getPos())) {
+            		trombou = false;
+            		break;
+            	}else if(g.getTipo() == 's' && Bart.getEstado() == 1 ) { //ta pulando
+            		trombou = false;
+            		break;
+            	}else if (vidas > 0) {
+            	
             		//bartVisible = !bartVisible;
             	}
-            	
             	collisionSound.play();
-            	
                 System.out.println("Bart trombou no objeto");
                 
                 trombou = true;                                              
@@ -249,13 +257,11 @@ public class GameScreen extends AbstractScreen{
     	gameMusic.setVolume(0.5f);
     	gameMusic.setLooping(true);
     	gameMusic.play();
-    	
     	jumpSound = Gdx.audio.newMusic(Gdx.files.internal("music/jump.wav"));
     	jumpSound.setVolume(0.25f);
-    	
     	collisionSound = Gdx.audio.newMusic(Gdx.files.internal("music/collision.mp3"));;
     	collisionSound.setVolume(0.8f);;
-    	
+
     	nolifeSound = Gdx.audio.newMusic(Gdx.files.internal("music/no_life.wav"));;
     	nolifeSound.setVolume(0.8f);;
     }

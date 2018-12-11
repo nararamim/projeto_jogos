@@ -22,8 +22,10 @@ public class RandObstaculo {
 	    		for(Material m : objeto.materials) m.set(new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA));
 	    		pos = new Vector3();
 	            pos.x = chosePosition(3);
+	            objeto.setPos((int) pos.x/45); 
 	            pos.y = -20;
 	            pos.z = z;
+	            objeto.setTipo('s');
 	            objeto.transform.translate(pos);
 	            objeto.update(1);
 	            return objeto;
@@ -32,8 +34,10 @@ public class RandObstaculo {
 	    		for(Material m : objeto.materials) m.set(new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA));
 	    		pos = new Vector3();
 	            pos.x = chosePosition(3);
+	            objeto.setPos((int) pos.x/45); 
 	            pos.y = -20;
 	            pos.z = z;
+	            objeto.setTipo('s');
 	            objeto.transform.translate(pos);
 	            //objeto.transform.scale(0.28f, 0.28f, 0.28f);
 	            objeto.update(1);
@@ -43,8 +47,10 @@ public class RandObstaculo {
 	    		for(Material m : objeto.materials) m.set(new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA));
 	    		pos = new Vector3();
 	            pos.x = chosePosition(2)+20;
+	            objeto.setPos((int) pos.x/45); 
 	            pos.y = -20;
 	            pos.z = z;
+	            objeto.setTipo('p');
 	            objeto.transform.translate(pos);
 	            //objeto.transform.scale(0.3f, 0.4f, 0.3f);
 	            objeto.update(1);
@@ -54,8 +60,10 @@ public class RandObstaculo {
 	    		for(Material m : objeto.materials) m.set(new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA));
 	    		pos = new Vector3();
 	            pos.x = chosePosition(3);
+	            objeto.setPos((int) pos.x/45); 
 	            pos.y = -20;
 	            pos.z = z;
+	            objeto.setTipo('a');
 	            objeto.transform.translate(pos);
 	            //objeto.transform.scale(0.8f, 0.8f, 0.8f);
 	            objeto.update(1);
@@ -97,7 +105,7 @@ public class RandObstaculo {
 	
     private int chosePosition (int i) {
     	Random rand = new Random();
-    	return 35*(rand.nextInt(i)-1);
+    	return 45*(rand.nextInt(i)-1);
     }
 
 }
