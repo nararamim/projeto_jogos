@@ -11,6 +11,7 @@ public class Bart {
 	public static final int JUMP = 1;
 	public static final int DYING = 2;
 	private int posicao;
+	private int posicao2;
 	private boolean endGame = false;
 	boolean updatingcolunadir = false;
 	boolean updatingcolunaesq = false;
@@ -27,6 +28,7 @@ public class Bart {
 		estados[DYING] = new GameObject(ModelFactory.getModelbyName("BartDying"));
 
 		posicao = 0;
+		posicao2 =0;
 
 		settings();
 	}
@@ -70,7 +72,7 @@ public class Bart {
 		if (updatingcolunadir) {
 			if (moving < 25) {
 				if(moving == 6 && change) {
-					posicao++;
+					posicao2++;
 					change = false;
 				}
 				moving += 0.51f;
@@ -84,7 +86,7 @@ public class Bart {
 		else if (updatingcolunaesq) {
 			if (moving < 25) {
 				if(moving ==6 && change) {
-					posicao--;
+					posicao2--;
 					change = false;
 				}
 				moving += 0.51f;
@@ -116,6 +118,7 @@ public class Bart {
 				updatingcolunadir = true;
 				estado = JUMP;
 				change = true;
+				posicao++;
 			} else {
 				posicao = 1;
 			}
@@ -131,6 +134,7 @@ public class Bart {
 				updatingcolunaesq = true;
 				estado = JUMP;
 				change = true;
+				posicao--;
 			} else {
 				posicao = -1;
 			}
@@ -154,7 +158,7 @@ public class Bart {
 	}
 
 	public int getPosicao() {
-		return this.posicao;
+		return this.posicao2;
 	}
 	
 	public int getAltura() {

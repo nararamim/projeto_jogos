@@ -191,7 +191,7 @@ public class GameScreen extends AbstractScreen{
 
     public void checkColisions() {
         for (GameObject g : objetos) {
-             if (g.collidesWith(Bart.getCurrent()) && (vidas>0)) {
+             if (g.collidesWith(Bart.getCurrent()) ) {
             	if(g.getTipo() == 'a' && (Bart.getPosicao() != g.getPos())) {
             		trombou = false;
             		break;
