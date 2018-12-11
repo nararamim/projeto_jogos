@@ -69,7 +69,7 @@ public class Bart {
 
 		if (updatingcolunadir) {
 			if (moving < 25) {
-				if(moving == 8.0f && change) {
+				if(moving == 6 && change) {
 					posicao++;
 					change = false;
 				}
@@ -81,9 +81,9 @@ public class Bart {
 				updatingcolunadir = false;
 			}
 		}
-		if (updatingcolunaesq) {
+		else if (updatingcolunaesq) {
 			if (moving < 25) {
-				if(moving ==8.0f && change) {
+				if(moving ==6 && change) {
 					posicao--;
 					change = false;
 				}
@@ -98,7 +98,7 @@ public class Bart {
 	}
 
 	public void pular() {
-		if (estado != JUMP) {
+		if (!updatingcolunadir && !updatingcolunaesq && estado!=JUMP) {
 			estado = JUMP;
 			sobe = true;
 		}

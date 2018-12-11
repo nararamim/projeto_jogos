@@ -192,10 +192,10 @@ public class GameScreen extends AbstractScreen{
     public void checkColisions() {
         for (GameObject g : objetos) {
              if (g.collidesWith(Bart.getCurrent()) && (vidas>0)) {
-            	if(g.getTipo() == 'a' && !(Bart.getPosicao() == g.getPos())) {
+            	if(g.getTipo() == 'a' && (Bart.getPosicao() != g.getPos())) {
             		trombou = false;
             		break;
-            	}else if(g.getTipo() == 's' && Bart.getEstado() == 1 ) { //ta pulando
+            	}else if(g.getTipo() == 's' && Bart.getAltura() > 8 ) { //ta pulando
             		trombou = false;
             		break;
             	}else if (vidas > 0) {
