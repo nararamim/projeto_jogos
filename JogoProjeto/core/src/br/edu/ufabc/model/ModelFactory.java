@@ -12,12 +12,11 @@ import com.badlogic.gdx.utils.UBJsonReader;
 public class ModelFactory {
 	
 	private static HashMap<String, Model> modelos = new HashMap<String,Model>();
-
 	
 	static {
 		ModelLoader<ModelParameters> loader;
 		loader = new G3dModelLoader(new UBJsonReader());
-		//System.out.println("Carregando modelos...");
+
 	     modelos.put("BartRun", loader.loadModel(Gdx.files.internal("Running2.g3db")));
 	     modelos.put("BartJump", loader.loadModel(Gdx.files.internal("Jump2.g3db")));
 	     modelos.put("BartDying", loader.loadModel(Gdx.files.internal("dying2.g3db")));
@@ -30,7 +29,6 @@ public class ModelFactory {
 	     modelos.put("cachorro", loader.loadModel(Gdx.files.internal("dog.g3db")));
 	     modelos.put("rato1", loader.loadModel(Gdx.files.internal("rat1.g3db")));
 
-	     //System.out.println("Modelos carregados!");
 	}
 	
 	public static Model getModelbyName(String name) {

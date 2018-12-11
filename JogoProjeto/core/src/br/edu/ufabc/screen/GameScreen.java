@@ -1,9 +1,10 @@
 package br.edu.ufabc.screen;
 
-import java.security.GeneralSecurityException;
-import java.util.ArrayList;
-import java.util.Random;
-
+import br.edu.ufabc.model.Bart;
+import br.edu.ufabc.model.GameObject;
+import br.edu.ufabc.model.ModelFactory;
+import br.edu.ufabc.model.RandObstaculo;
+import br.edu.ufabc.util.Parameters;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
@@ -15,24 +16,17 @@ import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g3d.Environment;
-import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
-import com.badlogic.gdx.graphics.g3d.attributes.BlendingAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.graphics.g3d.loader.G3dModelLoader;
-import com.badlogic.gdx.graphics.g3d.model.Node;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.UBJsonReader;
 
-import br.edu.ufabc.model.Bart;
-import br.edu.ufabc.model.GameObject;
-import br.edu.ufabc.model.ModelFactory;
-import br.edu.ufabc.model.RandObstaculo;
-import br.edu.ufabc.util.Parameters;
+import java.util.ArrayList;
 
 public class GameScreen extends AbstractScreen{
 
@@ -42,8 +36,6 @@ public class GameScreen extends AbstractScreen{
 	private ArrayList<ModelInstance>    ceus;
 	private boolean                     bartVisible = true;
 	private double                      tempo;
-	//private ModelInstance  			 	modelo3D;
-	//private CameraInputController	 	inputController;
 	
 	/////////////////////////////////////////////////
 	
@@ -51,12 +43,12 @@ public class GameScreen extends AbstractScreen{
     private ArrayList<GameObject>       objetos;
 	private Bart 						Bart;
 	private double						pontos = 0;
-	private double						vidas = 3;
+	private float						vidas = 100f;
 	private BitmapFont 					font;
 	private SpriteBatch 				spriteBatch;
 	private Matrix4 					viewMatrix;
 	private float						countcaminho;
-    private boolean                     trombou;
+    private boolean                     trombou = false;
     private float						speed = 3f;
     private Music           			gameMusic;
     private float 						countobstaculo;
@@ -117,17 +109,15 @@ public class GameScreen extends AbstractScreen{
 			}
 			updateObstaculos();
 	        for(GameObject h: objetos) {
-	        	//System.out.println(objetos.size());
 	        	h.transform.translate(0,0,speed);
 	        	h.update(1);
 	        }	        
 		}
 		else {
-			gameMusic.dispose();			
-			Bart.morrer();		
+			gameMusic.dispose();
+			Bart.morrer();
 			nolifeSound.play();
-			if (Bart.getEndGame()) {				
-				gameMusic.dispose();
+			if (Bart.getEndGame()) {
 				if ((int) pontos > getMaxScore()) {
 					setMaxScore((int)pontos);
 				}
@@ -158,7 +148,7 @@ public class GameScreen extends AbstractScreen{
         }
         
         tempo += Gdx.graphics.getDeltaTime();
-	    if (tempo >= 0.065f && vidas > 0)  {    	        	
+	    if (tempo >= 0.07f && vidas > 0)  {
 	    	bartVisible = true;
 	    	tempo = 0;
 	    }
@@ -192,19 +182,18 @@ public class GameScreen extends AbstractScreen{
 		spriteBatch.setProjectionMatrix(viewMatrix);
 		spriteBatch.begin();
 		font.draw(spriteBatch, "Score\n" + (int) pontos, 10, 550);
-		font.draw(spriteBatch, "MaxScore\n" + (int) getMaxScore(), 330, 550);
-		font.draw(spriteBatch, "Lifes\n" + (int) vidas, 670, 550);
+		font.draw(spriteBatch, "MaxScore\n" + (int) getMaxScore(), 300, 550);
+		font.draw(spriteBatch, "Health\n" + (int) vidas + "%" , 630, 550);
 		spriteBatch.end();
 		
 		///////////////////////////////////////
 	}
-    
-    
 
     public void checkColisions() {
         for (GameObject g : objetos) {
-            if (g.collidesWith(Bart.getCurrent())) {
-            	//vidas--;
+             if (g.collidesWith(Bart.getCurrent()) && (vidas>0)) {
+            	vidas= vidas - 0.7f;
+
             	if(g.getTipo() == 'a' && !(Bart.getPosicao() == g.getPos())) {
             		trombou = false;
             		break;
@@ -212,8 +201,7 @@ public class GameScreen extends AbstractScreen{
             		trombou = false;
             		break;
             	}else if (vidas > 0) {
-            	
-            		//bartVisible = !bartVisible;
+                    bartVisible = !bartVisible;
             	}
             	collisionSound.play();
                 System.out.println("Bart trombou no objeto");
@@ -257,8 +245,10 @@ public class GameScreen extends AbstractScreen{
     	gameMusic.setVolume(0.5f);
     	gameMusic.setLooping(true);
     	gameMusic.play();
+
     	jumpSound = Gdx.audio.newMusic(Gdx.files.internal("music/jump.wav"));
     	jumpSound.setVolume(0.25f);
+
     	collisionSound = Gdx.audio.newMusic(Gdx.files.internal("music/collision.mp3"));;
     	collisionSound.setVolume(0.8f);;
 

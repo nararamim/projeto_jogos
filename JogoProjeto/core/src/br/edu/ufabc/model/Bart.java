@@ -1,6 +1,5 @@
 package br.edu.ufabc.model;
 
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.attributes.BlendingAttribute;
 import com.badlogic.gdx.math.Vector3;
@@ -36,8 +35,6 @@ public class Bart {
 			estado.transform.translate(0, -20, 15);
 
 			for (Material mat : estado.materials) {
-				// mat.set(new BlendingAttribute(GL20.GL_SRC_ALPHA,
-				// GL20.GL_ONE_MINUS_SRC_ALPHA));
 				mat.remove(BlendingAttribute.Type);
 			}
 		}
@@ -48,7 +45,7 @@ public class Bart {
 		if (estado == JUMP && estados[estado].isDone()) {
 			estados[estado].reset();
 			estado = RUN;
-		} 
+		}
 
 		if (estado == DYING && estados[estado].isDone()) {
 			setEndGame(true);
@@ -92,12 +89,6 @@ public class Bart {
 
 			if (posicao < 1) {
 				updatingcolunadir = true;
-//        	float b = 0;
-//        	while (b>=-1)
-//	        for (GameObject estado: estados) {
-//	            estado.transform.translate(-0.05f,0,0);
-//	            b+=0.05;
-//	        }
 				posicao++;
 				estado = JUMP;
 			} else {
@@ -113,16 +104,12 @@ public class Bart {
 
 			if (posicao > -1) {
 				updatingcolunaesq = true;
-//			for (GameObject estado : estados) {
-//				estado.transform.translate(1f, 0, 0);
-//			}
 				posicao--;
 				estado = JUMP;
 			} else {
 				posicao = -1;
 			}
 		}
-		
 	}
 
 	public int getEstado() {
@@ -140,9 +127,8 @@ public class Bart {
 	public void setEndGame(boolean endGame) {
 		this.endGame = endGame;
 	}
-	
+
 	public int getPosicao() {
 		return this.posicao;
 	}
-
 }

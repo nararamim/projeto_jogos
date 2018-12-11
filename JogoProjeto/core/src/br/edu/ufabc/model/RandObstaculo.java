@@ -12,7 +12,7 @@ public class RandObstaculo {
 	
 	public GameObject getObstaculo(float z) {
 		Random rand = new Random();
-		int obs = rand.nextInt(4); //eu usaria 4
+		int obs = rand.nextInt(4);
 		GameObject objeto;
 		Vector3 pos;
 		//System.out.println(obs);
@@ -22,7 +22,6 @@ public class RandObstaculo {
 	    		for(Material m : objeto.materials) m.set(new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA));
 	    		pos = new Vector3();
 	            pos.x = chosePosition(3);
-	            objeto.setPos((int) pos.x/45); 
 	            pos.y = -20;
 	            pos.z = z;
 	            objeto.setTipo('s');
@@ -34,12 +33,10 @@ public class RandObstaculo {
 	    		for(Material m : objeto.materials) m.set(new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA));
 	    		pos = new Vector3();
 	            pos.x = chosePosition(3);
-	            objeto.setPos((int) pos.x/45); 
 	            pos.y = -20;
 	            pos.z = z;
 	            objeto.setTipo('s');
 	            objeto.transform.translate(pos);
-	            //objeto.transform.scale(0.28f, 0.28f, 0.28f);
 	            objeto.update(1);
 	            return objeto;
 			case 2: //pedra2
@@ -47,12 +44,11 @@ public class RandObstaculo {
 	    		for(Material m : objeto.materials) m.set(new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA));
 	    		pos = new Vector3();
 	            pos.x = chosePosition(2)+20;
-	            objeto.setPos((int) pos.x/45); 
+	            objeto.setPos((int) pos.x/45);
 	            pos.y = -20;
 	            pos.z = z;
 	            objeto.setTipo('p');
 	            objeto.transform.translate(pos);
-	            //objeto.transform.scale(0.3f, 0.4f, 0.3f);
 	            objeto.update(1);
 	            return objeto;
 			case 3:
@@ -60,12 +56,11 @@ public class RandObstaculo {
 	    		for(Material m : objeto.materials) m.set(new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA));
 	    		pos = new Vector3();
 	            pos.x = chosePosition(3);
-	            objeto.setPos((int) pos.x/45); 
+	            objeto.setPos((int) pos.x/45);
 	            pos.y = -20;
 	            pos.z = z;
 	            objeto.setTipo('a');
 	            objeto.transform.translate(pos);
-	            //objeto.transform.scale(0.8f, 0.8f, 0.8f);
 	            objeto.update(1);
 	            return objeto;
 			case 4:

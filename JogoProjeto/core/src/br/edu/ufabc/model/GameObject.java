@@ -2,7 +2,6 @@ package br.edu.ufabc.model;
 
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
-import com.badlogic.gdx.graphics.g3d.model.Animation;
 import com.badlogic.gdx.graphics.g3d.utils.AnimationController;
 import com.badlogic.gdx.graphics.g3d.utils.AnimationController.AnimationDesc;
 import com.badlogic.gdx.math.Vector3;
@@ -12,11 +11,9 @@ public class GameObject extends ModelInstance {
 
 	private AnimationController animationController;
 	private boolean done;
-	private float angle=0f;
 	private BoundingBox boundingBox;
 	private Vector3     originalMax;
 	private Vector3     originalMin;
-	private float resize;
 	private int pos;
 	private char tipo; //s - simples (pedra1 e rato); a - arvore ; p - pedra grande
 
@@ -54,13 +51,6 @@ public class GameObject extends ModelInstance {
                     });
         }
     }
-
-    public void setAngle(float angle) {
-		this.angle += angle;
-	}
-	public float getAngle() {
-		return this.angle;
-	}
 
 	public void update(float delta) {
 		animationController.update(delta);
