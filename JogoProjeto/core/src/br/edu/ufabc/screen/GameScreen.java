@@ -114,6 +114,7 @@ public class GameScreen extends AbstractScreen{
 		}
 		else {
 			gameMusic.dispose();
+			bartVisible = true;
 			Bart.morrer();
 			nolifeSound.play();
 			if (Bart.getEndGame()) {
@@ -182,7 +183,7 @@ public class GameScreen extends AbstractScreen{
 		spriteBatch.begin();
 		font.draw(spriteBatch, "Score\n" + (int) pontos, 10, 550);
 		font.draw(spriteBatch, "MaxScore\n" + (int) getMaxScore(), 330, 550);
-		font.draw(spriteBatch, "Lifes\n" + (int) vidas, 670, 550);
+		font.draw(spriteBatch, "Health\n" + (int) vidas, 670, 550);
 		spriteBatch.end();
 		
 		///////////////////////////////////////
@@ -200,9 +201,11 @@ public class GameScreen extends AbstractScreen{
             	}else if (vidas > 0) {
                     vidas= vidas - 0.7f;
                     bartVisible = !bartVisible;
+            	} else if (vidas == 0) {
+            		bartVisible = true;
             	}
             	collisionSound.play();
-                System.out.println("Bart trombou no objeto");
+                //System.out.println("Bart trombou no objeto");
                 
                 trombou = true;                                              
                 break;
