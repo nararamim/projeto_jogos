@@ -113,7 +113,7 @@ public class GameScreen extends AbstractScreen{
 	        }	        
 		}
 		else {
-			gameMusic.dispose();
+			gameMusic.dispose();			
 			bartVisible = true;
 			Bart.morrer();
 			nolifeSound.play();
@@ -200,11 +200,13 @@ public class GameScreen extends AbstractScreen{
             		break;
             	}else if (vidas > 0) {
                     vidas= vidas - 0.7f;
+                    collisionSound.play();
                     bartVisible = !bartVisible;
             	} else if (vidas == 0) {
-            		bartVisible = true;
+            		collisionSound.play();
+            		bartVisible = true;           		
             	}
-            	collisionSound.play();
+            	
                 //System.out.println("Bart trombou no objeto");
                 
                 trombou = true;                                              
