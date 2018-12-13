@@ -139,13 +139,6 @@ public class GameScreen extends AbstractScreen{
 			jumpSound.play();
 			Bart.esquerda();
 		}
-        if(Gdx.input.isKeyJustPressed(Keys.SPACE)) {             	
-        	vidas--;
-        	
-        	if (vidas > 0) {
-        		bartVisible = !bartVisible;
-        	}
-        }
         
         tempo += Gdx.graphics.getDeltaTime();
 	    if (tempo >= 0.07f && vidas > 0)  {
@@ -249,13 +242,13 @@ public class GameScreen extends AbstractScreen{
     	gameMusic.setLooping(true);
     	gameMusic.play();
 
-    	jumpSound = Gdx.audio.newMusic(Gdx.files.internal("music/jump.wav"));
+    	jumpSound = Gdx.audio.newMusic(Gdx.files.internal("music/jump.mp3"));
     	jumpSound.setVolume(0.25f);
 
     	collisionSound = Gdx.audio.newMusic(Gdx.files.internal("music/collision.mp3"));;
     	collisionSound.setVolume(0.8f);;
 
-    	nolifeSound = Gdx.audio.newMusic(Gdx.files.internal("music/no_life.wav"));;
+    	nolifeSound = Gdx.audio.newMusic(Gdx.files.internal("music/no_life.mp3"));;
     	nolifeSound.setVolume(0.8f);;
     }
 

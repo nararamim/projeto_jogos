@@ -79,7 +79,7 @@ public class CreditsScreen extends AbstractScreen{
 	}
 
 	private void musicInitialization() {
-		creditsMusic = Gdx.audio.newMusic(Gdx.files.internal("music/fail.wav"));		
+		creditsMusic = Gdx.audio.newMusic(Gdx.files.internal("music/fail.mp3"));		
 		creditsMusic.play();
 	}
 }
